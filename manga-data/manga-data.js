@@ -17,7 +17,7 @@ window.MangaData = {
           title: "Chapter 1: The Eminence in Shadow!",
           pages: 0,
           source:
-            "./manga-source/Kage no Jitsuryokusha ni Naritakute! - Ch. 1.pdf",
+            "manga-source/Kage no Jitsuryokusha ni Naritakute! - Ch. 1.pdf",
           type: "pdf",
         },
       ],
