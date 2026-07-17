@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reader's Haven | Log In</title>
+ 
+    <!-- Pre-load Theme to prevent Flicker -->
+    <script>
+        (function () {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'light') document.documentElement.classList.add('light-mode');
+        })();
+    </script>
+ 
+    <!-- Google Fonts: Inter & Kantumruy Pro (Khmer) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+ 
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ 
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+ 
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#121212',
+                        card: '#202020',
+                        accent: '#D6336C',
+                        muted: '#A0A0A0',
+                        darker: '#181818',
+                        surface: '#2A2A2A'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/login-page.css">
+</head>
+<body class="bg-dark text-white font-sans min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-accent selection:text-white">
+
+    <!-- Header / Navigation Bar -->
+    <header class="w-full py-5 px-6 md:px-12 flex items-center justify-between border-b border-gray-800/40 bg-dark/60 backdrop-blur-xl sticky top-0 z-40">
+        <!-- Back to Home Button -->
+        <a href="index.html" class="flex items-center gap-2 group text-muted hover:text-accent transition-all duration-300">
+            <i class="fa-solid fa-arrow-left text-sm transition-transform group-hover:-translate-x-1"></i>
+            <span class="text-xs font-black tracking-wider uppercase" data-i18n="span.home">Back to Home</span>
+        </a>
+
+        <!-- Language Switcher -->
+        <div class="relative">
+            <button id="btn-lang"
+                class="flex items-center gap-1.5 bg-card hover:bg-gray-800 text-muted hover:text-white px-3 py-2 rounded-full text-xs font-bold transition-all duration-300 border border-gray-800/40">
+                <i class="fa-solid fa-globe text-[11px]"></i>
+                <span id="lang-current">EN</span>
+            </button>
+            <div id="dropdown-lang"
+                class="absolute top-full right-0 mt-2 w-36 bg-card/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 py-2 overflow-hidden">
+                <button data-lang="en"
+                    class="lang-option w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all text-left">
+                    🇬🇧 <span>English</span>
+                </button>
+                <button data-lang="km"
+                    class="lang-option w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all text-left">
+                    🇰🇭 <span>ខ្មែរ</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow flex items-center justify-center px-4 py-12 md:py-20 relative">
+        <!-- Abstract Background Gradients -->
+        <div class="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-accent/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="w-full max-w-md relative z-10">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center justify-center gap-3 mb-8 group">
+                <span class="font-black text-3xl tracking-wider text-accent">Reader's Haven</span>
+            </a>
+
+            <!-- Login Form Card -->
+            <div class="bg-card/45 border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl backdrop-blur-2xl hover:border-accent/30 hover:shadow-[0_0_50px_rgba(214,51,108,0.15)] transition-all duration-500">
+                <!-- App Logo / Greeting -->
+                <div class="text-center mb-8">
+                    <h1 class="text-2xl md:text-3xl font-black tracking-tight text-white mb-2" data-i18n="sign.welcomeback">Welcome Back</h1>
+                    <p class="text-xs text-muted font-medium" data-i18n="sign.log">Log in to continue your reading journey</p>
+                </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="space-y-5">
+                <!-- Email Address -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-muted uppercase tracking-wider block" data-i18n="sign.email">Email Address</label>
+                    <div class="relative flex items-center bg-darker/60 rounded-2xl border border-gray-800/80 focus-within:border-accent focus-within:shadow-[0_0_12px_rgba(214,51,108,0.12)] transition-all duration-300 px-4 py-3">
+                        <i class="fa-regular fa-envelope text-muted mr-3"></i>
+                        <input type="email" id="login-email" required
+                            class="bg-transparent border-none outline-none text-sm w-full text-white placeholder-gray-600"
+                            placeholder="Enter your email address" data-i18n-placeholder="sign.email">
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="space-y-1.5">
+                    <div class="flex items-center justify-between">
+                        <label class="text-xs font-bold text-muted uppercase tracking-wider" data-i18n="sign.password">Password</label>
+                        <a href="#" id="forgot-password-link" class="text-xs font-bold text-accent hover:underline transition-all" data-i18n="sign.forgotpw">Forgot Password?</a>
+                    </div>
+                    <div class="relative flex items-center bg-darker/60 rounded-2xl border border-gray-800/80 focus-within:border-accent focus-within:shadow-[0_0_12px_rgba(214,51,108,0.12)] transition-all duration-300 px-4 py-3">
+                        <i class="fa-solid fa-lock text-muted mr-3"></i>
+                        <input type="password" id="login-password" required
+                            class="bg-transparent border-none outline-none text-sm w-full text-white placeholder-gray-600"
+                            placeholder="••••••••" data-i18n-placeholder="sign.password">
+                        <button type="button" id="toggle-password" class="text-muted hover:text-white transition-colors focus:outline-none">
+                            <i class="fa-regular fa-eye text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Remember Me Checkbox -->
+                <div class="flex items-center gap-2 pt-1">
+                    <input type="checkbox" id="login-remember" class="w-4 h-4 rounded border-gray-800 bg-darker/60 text-accent focus:ring-accent accent-accent cursor-pointer">
+                    <label for="login-remember" class="text-xs font-bold text-muted cursor-pointer select-none" data-i18n="sign.rememberme">Remember me</label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit"
+                    class="w-full bg-accent hover:bg-accent/90 active:scale-[0.98] text-white font-black text-xs tracking-widest uppercase py-4 rounded-2xl transition-all duration-300 shadow-[0_4px_20px_rgba(214,51,108,0.25)] mt-6">
+                    <span data-i18n="login">LOG IN</span>
+                </button>
+            </form>
+
+            <!-- Bottom Redirect -->
+            <div class="text-center mt-8 pt-6 border-t border-gray-800/40 text-xs">
+                <span class="text-muted font-medium" data-i18n="sign.dont">Don't have an account?</span>
+                <a href="signup.html" class="text-accent font-black tracking-wider uppercase ml-1.5 hover:underline" data-i18n="signup">Sign Up</a>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <!-- OVERLAYS FOR FORGOT PASSWORD SYSTEM (As expected by auth.js) -->
+
+    <!-- STEP 1: Forgot Password Overlay (Enter Email) -->
+    <div id="forgot-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 p-4">
+        <div class="w-full max-w-md bg-card/75 border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl backdrop-blur-xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-black tracking-tight text-white" data-i18n="sign.forgotpw">Forgot Password?</h3>
+                <button id="forgot-close" class="text-muted hover:text-white transition-colors"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p class="text-xs text-muted mb-5 font-medium" data-i18n="sign.enteremial">Enter your email to reset password</p>
+            <form id="forgot-email-form" class="space-y-4">
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold text-muted uppercase tracking-wider block" data-i18n="sign.email">Email Address</label>
+                    <input type="email" id="forgot-email" required
+                        class="w-full bg-darker/60 rounded-2xl border border-gray-800 px-4 py-3 text-sm text-white focus:border-accent focus:outline-none transition-colors"
+                        placeholder="your-email@example.com" data-i18n-placeholder="sign.fillpw">
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" id="forgot-back-to-login" class="flex-1 bg-surface hover:bg-gray-800 text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all" data-i18n="profile.cancel">Cancel</button>
+                    <button type="submit" class="flex-1 bg-accent hover:bg-accent/90 text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all shadow-lg" data-i18n="sign.resetpassword">Reset Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- STEP 2: Verification Code Overlay -->
+    <div id="code-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 p-4">
+        <div class="w-full max-w-md bg-card/75 border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl backdrop-blur-xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-black tracking-tight text-white" data-i18n="sign.verification">Verification Code</h3>
+                <button id="code-close" class="text-muted hover:text-white transition-colors"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p class="text-xs text-muted mb-5 font-medium" data-i18n="sign.code">Enter the 6-digit code sent to your email</p>
+            <form id="code-verify-form" class="space-y-4">
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold text-muted uppercase tracking-wider block" data-i18n="sign.code1">Enter 6-digit code</label>
+                    <input type="text" id="verify-code" required maxlength="6"
+                        class="w-full bg-darker/60 rounded-2xl border border-gray-800 px-4 py-3 text-sm text-white tracking-widest text-center font-black focus:border-accent focus:outline-none transition-colors"
+                        placeholder="••••••" data-i18n-placeholder="sign.code1">
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" id="code-back-to-email" class="flex-1 bg-surface hover:bg-gray-800 text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all"><i class="fa-solid fa-chevron-left mr-1.5"></i> Back</button>
+                    <button type="submit" class="flex-1 bg-accent hover:bg-accent/90 text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all shadow-lg" data-i18n="sendcode">VERIFY CODE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- STEP 3: Change Password Overlay -->
+    <div id="reset-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 p-4">
+        <div class="w-full max-w-md bg-card/75 border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl backdrop-blur-xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-black tracking-tight text-white" data-i18n="sign.changepw">Change Password</h3>
+                <button id="reset-close" class="text-muted hover:text-white transition-colors"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p class="text-xs text-muted mb-5 font-medium" data-i18n="sign.newpassword">New Password</p>
+            <form id="reset-password-form" class="space-y-4">
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold text-muted uppercase tracking-wider block" data-i18n="sign.newpassword">New Password</label>
+                    <input type="password" id="new-password" required
+                        class="w-full bg-darker/60 rounded-2xl border border-gray-800 px-4 py-3 text-sm text-white focus:border-accent focus:outline-none transition-colors"
+                        placeholder="••••••••" data-i18n-placeholder="sign.newpassword">
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold text-muted uppercase tracking-wider block" data-i18n="sign.condirmnew">Confirm New Password</label>
+                    <input type="password" id="confirm-new-password" required
+                        class="w-full bg-darker/60 rounded-2xl border border-gray-800 px-4 py-3 text-sm text-white focus:border-accent focus:outline-none transition-colors"
+                        placeholder="••••••••" data-i18n-placeholder="sign.condirmnew">
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" id="reset-back-to-login" class="flex-1 bg-surface hover:bg-gray-800 text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all" data-i18n="sign.login">Log In</button>
+                    <button type="submit" class="flex-1 bg-accent hover:bg-accent/90 text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-all shadow-lg" data-i18n="profile.updatePassword">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script src="./assets/js/i18n.js"></script>
+    <script src="./assets/js/auth.js"></script>
+</body>
+</html>

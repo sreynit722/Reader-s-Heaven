@@ -1,0 +1,29 @@
+    body {
+            background-color: #121212;
+            transition: opacity 0.4s ease, background-color 0.3s ease;
+            opacity: 0;
+            background-image: url("../imagine/website/bg.jpg");
+            width: auto;
+        }
+        body.loaded {
+            opacity: 1;
+        }
+        body.fade-out {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        .light-mode {
+            --tw-bg-opacity: 1;
+            background-color: #f8f9fa !important;
+            color: #212529 !important;
+            width: auto;
+        }
+        .light-mode .bg-darker { background-color: #ffffff !important; }
+        .light-mode .bg-card { background-color: #f1f3f5 !important; border-color: #dee2e6 !important; }
+        .light-mode .bg-dark { background-color: #e9ecef !important; }
+        .light-mode .bg-surface { background-color: #e3e6f0 !important; }
+        .light-mode text-white { color: #212529 !important; }
+        .light-mode .text-muted { color: #6c757d !important; }
+        .light-mode h3, .light-mode h2, .light-mode input, .light-mode textarea { color: #212529 !important; }
+
+ 

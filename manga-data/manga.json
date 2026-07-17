@@ -1,0 +1,945 @@
+{
+  "carouselData": [
+    {
+      "title": "THE EMINENCE IN SHADOW",
+      "demo": "shounen",
+      "chapter": "Chapter 1",
+      "desc": "Cid's dream is to become a mastermind who pulls strings in the shadows. Reincarnated into a fantasy world, he creates an imaginary organization to fight a cult... only for that cult to actually exist!",
+      "status": "ONGOING",
+      "genres": ["Action", "Comedy", "Fantasy", "Isekai"],
+      "img": "./manga-art/Kage no Jitsuryokusha ni Naritakute!.jpg",
+      "chapters": [
+        {
+          "id": "eis-1",
+          "title": "Chapter 1: The Eminence in Shadow!",
+          "pages": 0,
+          "source": "./manga-source/Kage no Jitsuryokusha ni Naritakute! - Ch. 1.pdf",
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "ATTACK ON TITAN",
+      "chapter": "Chapter 139: Toward the Tree on That Hill",
+      "desc": "The final, world-shaking battle reaches its definitive conclusion. A world without walls awaits in the epic finale to Hajime Isayama's masterpiece.",
+      "status": "COMPLETED",
+      "genres": ["Action", "Drama", "Mystery"],
+      "img": "./manga-art/attack_on_titan.jpg",
+      "chapters": [
+        {
+          "id": "aot-139",
+          "title": "Chapter 139: Toward the Tree on That Hill",
+          "pages": 20
+        },
+        { "id": "aot-138", "title": "Chapter 138: A Long Dream", "pages": 18 },
+        { "id": "aot-137", "title": "Chapter 137: Titans", "pages": 16 },
+        {
+          "id": "aot-2",
+          "title": "Chapter 2: The World of the Titans",
+          "pages": 41,
+          "source": "./manga-source/chapter_2-Attack_on_Titan.pdf",
+          "type": "pdf"
+        },
+        {
+          "id": "aot-1",
+          "title": "Chapter 1: To You, 2000 Years From   Now",
+          "pages": 51,
+          "source": "./manga-source/chapter_1-Attack_on_Titan.pdf",
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "SOLO LEVELING",
+      "chapter": "Chapter 179 (COMPLETED)",
+      "desc": "The final battle against the Monarchs.<br><br>Sung Jinwoo faces his greatest challenge yet in this epic conclusion.",
+      "status": "COMPLETED",
+      "genres": ["Action", "Fantasy", "System"],
+      "img": "./manga-art/solo_leveling.jpg",
+      "chapters": [
+        {
+          "id": "sl-179",
+          "title": "Chapter 179: Epilogue finale",
+          "pages": 15
+        },
+        {
+          "id": "sl-178",
+          "title": "Chapter 178: The Monarch of Shadows",
+          "pages": 12
+        },
+        {
+          "id": "sl-1",
+          "title": "Chapter 1: The Courage of the Weakest",
+          "pages": 18
+        }
+      ]
+    },
+    {
+      "title": "CHAINSAW MAN",
+      "chapter": "Chapter 131",
+      "desc": "Denji's chaotic life continues as new devils appear in the city. High-octane action and dark comedy awaits.",
+      "status": "COMPLETED",
+      "genres": ["Action", "Supernatural", "Gore"],
+      "img": "../manga-art/chainsaw_man.jpg",
+     "chapters": [
+       {
+         "id": "csm-1",
+         "title": "Chapter 232 [END]",
+         "source": "./manga-source/chapter_232-Chainsaw_Man.pdf",
+         "pages": 23
+       },
+       {
+         "id": "csm-1",
+         "title": "Chapter 231:",
+         "source": "./manga-source/chapter_231-Chainsaw_Man.pdf",
+         "pages": 23
+       },
+       {
+         "id": "csm-1",
+         "title": "Chapter 3",
+         "source": "./manga-source/chapter_3-Chainsaw_Man.pdf",
+         "pages": 23
+       },
+       {
+         "id": "csm-1",
+         "title": "Chapter 2",
+         "source": "./manga-source/chapter_2-Chainsaw_Man.pdf",
+         "pages": 26
+       },
+       {
+         "id": "csm-1",
+         "title": "Chapter 1",
+         "source": "./manga-source/chapter_1-Chainsaw_Man.pdf",
+         "pages": 57
+       }
+     ]
+      
+    },
+    {
+      "title": "WINDBREAKER",
+      "ch": "Ch. 344",
+      "rating": 4.5,
+      "views": "15.5k",
+      "isNew": false,
+      "img": "../manga-art/windbreaker.jpg",
+      "chapters": [
+        {
+          "id": "wb-1",
+          "title": "Chapter 1: Episode0",
+          "source": "./manga-source/S1-Episode0_WindBreaker.pdf",
+          "pages": 24
+        }
+      ]
+    },
+     {
+      "title": "Blue Lock: Episode Nagi",
+      "ch": "Ch. 215",
+      "rating": 4.7,
+      "views": "9.2k",
+      "isNew": true,
+      "img": "./manga-art/blue_lock_episode_nagi.jpg",
+      "chapters": [
+        {
+          "id": "bl-4",
+          "title": "Chapter 4: A Genius",
+          "source": "./manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 36,
+          "type": "pdf"
+        },
+         {
+          "id": "bl-3",
+          "title": "Chapter 3: A Genius",
+          "source": "./manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 33,
+          "type": "pdf"
+        },
+         {
+          "id": "bl-2",
+          "title": "Chapter 2: Promise",
+          "source": "./manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 52,
+          "type": "pdf"
+        },
+         {
+          "id": "bl-1",
+          "title": "Chapter 1: A Genius",
+          "source": "./manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 61,
+          "type": "pdf"
+        }
+      ]
+    }
+    
+  ],
+  "gridData": [
+    {
+      "title": "The Eminence in Shadow",
+      "demo": "shounen",
+      "ch": "Ch. 1",
+      "rating": 4.9,
+      "views": "15.4k",
+      "isNew": true,
+      "img": "../manga-art/Kage no Jitsuryokusha ni Naritakute!.jpg",
+      "chapters": [
+        {
+          "id": "eis-1",
+          "title": "Chapter 1: The Eminence in Shadow!",
+          "pages": 0,
+          "source": "../manga-source/Kage no Jitsuryokusha ni Naritakute! - Ch. 1.pdf",
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "Attack on Titan",
+      "ch": "Ch. 139",
+      "desc": "In this post-apocalyptic sci-fi story, humanity has been devastated by the bizarre, giant humanoids known as the Titans. Little is known about where they came from or why they are bent on consuming mankind. Seemingly unintelligent, they have roamed the world for years, killing everyone they see. For the past century, what’s left of man has hidden in a giant, three-walled city. People believe their 100-meter high walls will protect them from the Titans, but the sudden appearance of an immense Titan is about to change everything.",
+      "rating": 5.0,
+      "views": "25.5k",
+      "isNew": false,
+      "img": "../manga-art/attack_on_titan.jpg",
+      "chapters": [
+        {
+          "id": "aot-139",
+          "title": "Chapter 139: Toward the Tree on That Hill",
+          "pages": 20
+        },
+        { "id": "aot-138", "title": "Chapter 138: A Long Dream", "pages": 18 },
+        { "id": "aot-137", "title": "Chapter 137: Titans", "pages": 16 },
+        {
+          "id": "aot-2",
+          "title": "Chapter 2: The World of the Titans",
+          "pages": 41,
+          "source": "./manga-source/chapter_2-Attack_on_Titan.pdf",
+          "type": "pdf"
+        },
+        {
+          "id": "aot-1",
+          "title": "Chapter 1: To You, 2000 Years From   Now",
+          "pages": 51,
+          "source": "./manga-source/chapter_1-Attack_on_Titan.pdf",
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "Solo Leveling",
+      "ch": "Ch. 179",
+      "rating": 4.9,
+      "views": "18.2k",
+      "isNew": false,
+      "img": "../manga-art/solo_leveling.jpg",
+      "chapters": [
+        {
+          "id": "sl-179",
+          "title": "Chapter 179: Epilogue finale",
+          "pages": 15
+        },
+        {
+          "id": "sl-178",
+          "title": "Chapter 178: The Monarch of Shadows",
+          "pages": 12
+        },
+        {
+          "id": "sl-1",
+          "title": "Chapter 1: The Courage of the Weakest",
+          "pages": 18
+        }
+      ]
+    },
+    {
+      "title": "Chainsaw Man",
+      "ch": "Ch. 131",
+      "rating": 4.8,
+      "views": "13.1k",
+      "isNew": true,
+      "img": "../manga-art/chainsaw_man.jpg",
+      "chapters": [
+        {
+          "id": "csm-1",
+          "title": "Chapter 232 [END]",
+          "source": "./manga-source/chapter_232-Chainsaw_Man.pdf",
+          "pages": 23
+        },
+        {
+          "id": "csm-1",
+          "title": "Chapter 231:",
+          "source": "./manga-source/chapter_231-Chainsaw_Man.pdf",
+          "pages": 23
+        },
+        {
+          "id": "csm-1",
+          "title": "Chapter 3",
+          "source": "./manga-source/chapter_3-Chainsaw_Man.pdf",
+          "pages": 23
+        },
+        {
+          "id": "csm-1",
+          "title": "Chapter 2",
+          "source": "./manga-source/chapter_2-Chainsaw_Man.pdf",
+          "pages": 26
+        },
+        {
+          "id": "csm-1",
+          "title": "Chapter 1",
+          "source": "./manga-source/chapter_1-Chainsaw_Man.pdf",
+          "pages": 57
+        }
+      ]
+    },
+    {
+      "title": "One Piece",
+      "ch": "Ch. 1183",
+      "desc": "Monkey D. Luffy and his crew of Straw Hat Pirates continue their journey to find the ultimate treasure, the One Piece, and become the Pirate King.",
+      "rating": 4.5,
+      "views": "15.5k",
+      "isNew": true,
+      "img": "../manga-art/one_piece.jpg",
+      "chapters": [
+        {
+          "id": "op-4",
+          "title": "Chapter 4: The Great Captain Morgan",
+          "pages": 20,
+          "source": "./manga-source/chapter_4-One_Piece.pdf",
+          "type": "pdf"
+        },
+        {
+          "id": "op-3",
+          "title": "Chapter 3: Enter Zoro: Pirate Hunter",
+          "pages": 22,
+          "source": "./manga-source/chapter_3-One_Piece.pdf",
+          "type": "pdf"
+        },
+        {
+          "id": "op-2",
+          "title": "Chapter 2: They call him Straw Hat Luffy",
+          "pages": 24,
+          "source": "./manga-source/chapter_2-One_Piece.pdf",
+          "type": "pdf"
+        },
+        {
+          "id": "op-1",
+          "title": "Chapter 1: Romance Dawn",
+          "pages": 57,
+          "source": "./manga-source/chapter_1-One_Piece.pdf",
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "WINDBREAKER",
+      "ch": "Ch. 344",
+      "rating": 4.5,
+      "views": "15.5k",
+      "isNew": false,
+      "img": "../manga-art/windbreaker.jpg",
+      "chapters": [
+        {
+          "id": "wb-1",
+          "title": "Chapter 1: Episode0",
+          "source": "./manga-source/S1-Episode0_WindBreaker.pdf",
+          "pages": 24,
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "Lookism",
+      "ch": "Ch. 608",
+      "rating": 4.9,
+      "views": "12.2k",
+      "isNew": false,
+      "img": "./manga-art/lookism.jpg"
+    },
+    {
+      "title": "Operation: True Love",
+      "ch": "Ch. 134",
+      "rating": 5.0,
+      "views": "22.0k",
+      "isNew": false,
+      "img": "../manga-art/Operation_True_Love.jpg"
+    },
+    {
+      "title": "Blue Lock: Episode Nagi",
+      "ch": "Ch. 215",
+      "rating": 4.7,
+      "views": "9.2k",
+      "isNew": true,
+      "img": "../manga-art/blue_lock_episode_nagi.jpg",
+      "chapters": [
+        {
+          "id": "bl-4",
+          "title": "Chapter 4: A Genius",
+          "source": "./manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 36,
+          "type": "pdf"
+        },
+         {
+          "id": "bl-3",
+          "title": "Chapter 3: A Genius",
+          "source": "./manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 33,
+          "type": "pdf"
+        },
+         {
+          "id": "bl-2",
+          "title": "Chapter 2: Promise",
+          "source": "./manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 52,
+          "type": "pdf"
+        },
+         {
+          "id": "bl-1",
+          "title": "Chapter 1: A Genius",
+          "source": "../manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 61,
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "Naruto",
+      "ch": "Ch. 700",
+      "rating": 4.6,
+      "views": "50.1k",
+      "isNew": false,
+      "img": "../manga-art/naruto.jpg"
+    },
+    {
+      "title": "JoJo's Bizarre Adventure - Part 1 - Phantom Blood",
+      "ch": "Ch. 44",
+      "rating": 4.5,
+      "views": "10.8k",
+      "isNew": false,
+      "img": "../manga-art/jojo_phantom_blood.jpg"
+    },
+    {
+      "title": "Nana",
+      "ch": "Ch. 21",
+      "rating": 4.6,
+      "views": "50.1k",
+      "isNew": false,
+      "img": "../manga-art/nana.jpg"
+    },
+    {
+      "title": "Maid-sama!",
+      "ch": "Ch. 85",
+      "rating": 4.6,
+      "views": "40.1k",
+      "isNew": false,
+      "img": "./manga-art/maid_sama.jpg"
+    },
+    {
+      "title": "Dragon Ball",
+      "ch": "Ch. 519",
+      "rating": 4.7,
+      "views": "45.5k",
+      "isNew": false,
+      "img": "../manga-art/dragonball.jpg "
+    },
+    {
+      "title": "Tokyo Ghoul",
+      "ch": "Ch. 143",
+      "rating": 4.8,
+      "views": "12.2k",
+      "isNew": false,
+      "img": "../manga-art/tokyo_ghoul.jpg"
+    },
+    {
+      "title": "Death Note",
+      "ch": "Ch. 108.4",
+      "rating": 4.9,
+      "views": "30.5k",
+      "isNew": false,
+      "img": "../manga-art/death_note.jpg "
+    },
+    {
+      "title": "Haikyuu!!",
+      "ch": "Ch. 402.3",
+      "rating": 4.8,
+      "views": "11.5k",
+      "isNew": false,
+      "img": "../manga-art/haikyuu.jpg"
+    },
+    {
+      "title": "The Summer Hikaru Died",
+      "ch": "Ch. 40.3",
+      "rating": 3.5,
+      "views": "6.2k",
+      "isNew": true,
+      "img": "../manga-art/the_summer_hikaru_died.jpg"
+    },
+    {
+      "title": "Monster",
+      "ch": "Ch. 162",
+      "rating": 4.4,
+      "views": "4.2k",
+      "isNew": true,
+      "img": "../manga-art/monster.jpg"
+    },
+    {
+      "title": "Vinland Saga",
+      "ch": "Ch. 220",
+      "rating": 4.9,
+      "views": "8.5k",
+      "isNew": false,
+      "img": "../manga-art/vinland_saga.jpg"
+    },
+    {
+      "title": "Vagabond",
+      "ch": "Ch. 327",
+      "rating": 5.0,
+      "views": "7.1k",
+      "isNew": false,
+      "img": "../manga-art/vagabond.jpg"
+    },
+    {
+      "title": "Berserk",
+      "ch": "Ch. 373",
+      "rating": 5.0,
+      "views": "25.2k",
+      "isNew": true,
+      "img": "../manga-art/berserk.jpg"
+    },
+    {
+      "title": "Blood-C",
+      "ch": "Ch. 17",
+      "rating": 4.8,
+      "views": "22.5k",
+      "isNew": true,
+      "img": "../manga-art/blood_c.jpg"
+    },
+    {
+      "title": "Slam Dunk",
+      "ch": "Ch. 276",
+      "rating": 4.9,
+      "views": "10.1k",
+      "isNew": false,
+      "img": "../manga-art/slam_dunk.jpg"
+    },
+    {
+      "title": "The Regressed Son of a Duke is an Assassin",
+      "ch": "Ch. 127",
+      "rating": 4.9,
+      "views": "5.5k",
+      "isNew": false,
+      "img": "../manga-art/the_regressed_son_of_a_duke_is_an_assassin.jpg"
+    },
+    {
+      "title": "The Knight Who Only Lives Today",
+      "ch": "Ch. 111",
+      "rating": 4.9,
+      "views": "9.2k",
+      "isNew": true,
+      "img": "../manga-art/the_knight_who_only_lives_today.jpg "
+    },
+    {
+      "title": "Sakamoto Days",
+      "ch": "Ch. 259",
+      "rating": 4.9,
+      "views": "18.8k",
+      "isNew": false,
+      "img": "../manga-art/sakamoto_days.jpg"
+    },
+    {
+      "title": "KIKI",
+      "ch": "Ch. 259",
+      "rating": 4.9,
+      "views": "18.8k",
+      "isNew": false,
+      "img": "../manga-art/sakamoto_days.jpg"
+    },    
+    {
+      "title": "Sakamoto Days",
+      "ch": "Ch. 259",
+      "rating": 4.9,
+      "views": "18.8k",
+      "isNew": false,
+      "img": "../manga-art/sakamoto_days.jpg"
+    },
+    {
+      "title": "Sakamoto Days",
+      "ch": "Ch. 259",
+      "rating": 4.9,
+      "views": "18.8k",
+      "isNew": false,
+      "img": "../manga-art/sakamoto_days.jpg"
+    },
+    {
+      "title": "Sakamoto Days",
+      "ch": "Ch. 259",
+      "rating": 4.9,
+      "views": "18.8k",
+      "isNew": false,
+      "img": "../manga-art/sakamoto_days.jpg"
+    }
+  ],
+
+  "trendingData": [
+    {
+      "title": "The Eminence in Shadow",
+      "ch": "Ch. 1",
+      "rating": 4.9,
+      "views": "15.4k",
+      "isNew": true,
+      "img": "../manga-art/Kage no Jitsuryokusha ni Naritakute!.jpg",
+      "chapters": [
+        {
+          "id": "eis-1",
+          "title": "Chapter 1: The Eminence in Shadow!",
+          "pages": 0,
+          "source": "../manga-source/Kage no Jitsuryokusha ni Naritakute! - Ch. 1.pdf",
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "Attack on Titan",
+      "ch": "Ch. 139",
+      "rating": 5.0,
+      "views": "25.5k",
+      "isNew": false,
+      "img": "../manga-art/attack_on_titan.jpg",
+      "chapters": [
+        {
+          "id": "aot-139",
+          "title": "Chapter 139: Toward the Tree on That Hill",
+          "pages": 20
+        },
+        { "id": "aot-138", "title": "Chapter 138: A Long Dream", "pages": 18 },
+        { "id": "aot-137", "title": "Chapter 137: Titans", "pages": 16 },
+        {
+          "id": "aot-2",
+          "title": "Chapter 2: The World of the Titans",
+          "pages": 41,
+          "source": "./manga-source/chapter_2-Attack_on_Titan.pdf",
+          "type": "pdf"
+        },
+        {
+          "id": "aot-1",
+          "title": "Chapter 1: To You, 2000 Years From   Now",
+          "pages": 51,
+          "source": "./manga-source/chapter_1-Attack_on_Titan.pdf",
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "Solo Leveling",
+      "ch": "Ch. 179",
+      "rating": 4.9,
+      "views": "18.2k",
+      "isNew": false,
+      "img": "../manga-art/solo_leveling.jpg",
+      "chapters": [
+        {
+          "id": "sl-179",
+          "title": "Chapter 179: Epilogue finale",
+          "pages": 15
+        },
+        {
+          "id": "sl-178",
+          "title": "Chapter 178: The Monarch of Shadows",
+          "pages": 12
+        },
+        {
+          "id": "sl-1",
+          "title": "Chapter 1: The Courage of the Weakest",
+          "pages": 18
+        }
+      ]
+    },
+    {
+      "title": "Chainsaw Man",
+      "ch": "Ch. 131",
+      "rating": 4.8,
+      "views": "13.1k",
+      "isNew": true,
+      "img": "../manga-art/chainsaw_man.jpg",
+      "chapters": [
+        { "id": "csm-131", "title": "Chapter 131: Taste of Shit", "pages": 16 },
+        { "id": "csm-130", "title": "Chapter 130: Kill Building", "pages": 14 },
+        { "id": "csm-1", "title": "Chapter 1: Dog & Chainsaw", "pages": 22 }
+      ]
+    },
+    {
+      "title": "One Piece",
+      "ch": "Ch. 1183",
+      "rating": 4.5,
+      "views": "15.5k",
+      "isNew": true,
+      "img": "../manga-art/one_piece.jpg",
+      "chapters": [
+        {
+          "id": "aot-139",
+          "title": "Chapter 139: Toward the Tree on That Hill",
+          "pages": 20
+        },
+        { "id": "aot-138", "title": "Chapter 138: A Long Dream", "pages": 18 },
+        { "id": "aot-137", "title": "Chapter 137: Titans", "pages": 16 },
+        {
+          "id": "aot-2",
+          "title": "Chapter 2: The World of the Titans",
+          "pages": 41,
+          "source": "./manga-source/chapter_2-Attack_on_Titan.pdf",
+          "type": "pdf"
+        },
+        {
+          "id": "aot-1",
+          "title": "Chapter 1: To You, 2000 Years From   Now",
+          "pages": 51,
+          "source": "./manga-source/chapter_1-Attack_on_Titan.pdf",
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "WINDBREAKER",
+      "ch": "Ch. 344",
+      "rating": 4.5,
+      "views": "15.5k",
+      "isNew": false,
+      "img": "../manga-art/windbreaker.jpg",
+      "chapters": [
+        {
+          "id": "wb-1",
+          "title": "Chapter 1: Episode0",
+          "source": "./manga-source/S1-Episode0_WindBreaker.pdf",
+          "pages": 24,
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "Lookism",
+      "ch": "Ch. 608",
+      "rating": 4.9,
+      "views": "12.2k",
+      "isNew": false,
+      "img": "./manga-art/lookism.jpg"
+    },
+    {
+      "title": "Operation: True Love",
+      "ch": "Ch. 134",
+      "rating": 5.0,
+      "views": "22.0k",
+      "isNew": false,
+      "img": "../manga-art/Operation_True_Love.jpg"
+    },
+    {
+      "title": "Blue Lock: Episode Nagi",
+      "ch": "Ch. 215",
+      "rating": 4.7,
+      "views": "9.2k",
+      "isNew": true,
+      "img": "../manga-art/blue_lock_episode_nagi.jpg",
+      "chapters": [
+        {
+          "id": "bl-4",
+          "title": "Chapter 4: A Genius",
+          "source": "../manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 36,
+          "type": "pdf"
+        },
+        {
+          "id": "bl-3",
+          "title": "Chapter 3: A Genius",
+          "source": "../manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 33,
+          "type": "pdf"
+        },
+        {
+          "id": "bl-2",
+          "title": "Chapter 2: Promise",
+          "source": "../manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 52,
+          "type": "pdf"
+        },
+        {
+          "id": "bl-1",
+          "title": "Chapter 1: A Genius",
+          "source": "../manga-source/Blue_Lock-Episode_Nagi-Ch.1-Un_verdadero_prodigio.pdf",
+          "pages": 61,
+          "type": "pdf"
+        }
+      ]
+    },
+    {
+      "title": "Naruto",
+      "ch": "Ch. 700",
+      "rating": 4.6,
+      "views": "50.1k",
+      "isNew": false,
+      "img": "../manga-art/naruto.jpg"
+    },
+    {
+      "title": "JoJo's Bizarre Adventure - Part 1 - Phantom Blood",
+      "ch": "Ch. 44",
+      "rating": 4.5,
+      "views": "10.8k",
+      "isNew": false,
+      "img": "../manga-art/jojo_phantom_blood.jpg"
+    },
+    {
+      "title": "Nana",
+      "ch": "Ch. 21",
+      "rating": 4.6,
+      "views": "50.1k",
+      "isNew": false,
+      "img": "../manga-art/nana.jpg"
+    },
+    {
+      "title": "Maid-sama!",
+      "ch": "Ch. 85",
+      "rating": 4.6,
+      "views": "40.1k",
+      "isNew": false,
+      "img": "./manga-art/maid_sama.jpg"
+    },
+    {
+      "title": "Dragon Ball",
+      "ch": "Ch. 519",
+      "rating": 4.7,
+      "views": "45.5k",
+      "isNew": false,
+      "img": "../manga-art/dragonball.jpg "
+    },
+    {
+      "title": "Tokyo Ghoul",
+      "ch": "Ch. 143",
+      "rating": 4.8,
+      "views": "12.2k",
+      "isNew": false,
+      "img": "../manga-art/tokyo_ghoul.jpg"
+    },
+    {
+      "title": "Death Note",
+      "ch": "Ch. 108.4",
+      "rating": 4.9,
+      "views": "30.5k",
+      "isNew": false,
+      "img": "../manga-art/death_note.jpg "
+    },
+    {
+      "title": "Haikyuu!!",
+      "ch": "Ch. 402.3",
+      "rating": 4.8,
+      "views": "11.5k",
+      "isNew": false,
+      "img": "../manga-art/haikyuu.jpg"
+    },
+    {
+      "title": "The Summer Hikaru Died",
+      "ch": "Ch. 40.3",
+      "rating": 3.5,
+      "views": "6.2k",
+      "isNew": true,
+      "img": "../manga-art/the_summer_hikaru_died.jpg"
+    },
+    {
+      "title": "Monster",
+      "ch": "Ch. 162",
+      "rating": 4.4,
+      "views": "4.2k",
+      "isNew": true,
+      "img": "../manga-art/monster.jpg"
+    },
+    {
+      "title": "Vinland Saga",
+      "ch": "Ch. 220",
+      "rating": 4.9,
+      "views": "8.5k",
+      "isNew": false,
+      "img": "../manga-art/vinland_saga.jpg"
+    },
+    {
+      "title": "Vagabond",
+      "ch": "Ch. 327",
+      "rating": 5.0,
+      "views": "7.1k",
+      "isNew": false,
+      "img": "../manga-art/vagabond.jpg"
+    },
+    {
+      "title": "Berserk",
+      "ch": "Ch. 373",
+      "rating": 5.0,
+      "views": "25.2k",
+      "isNew": true,
+      "img": "../manga-art/berserk.jpg"
+    },
+    {
+      "title": "Blood-C",
+      "ch": "Ch. 17",
+      "rating": 4.8,
+      "views": "22.5k",
+      "isNew": true,
+      "img": "../manga-art/blood_c.jpg"
+    },
+    {
+      "title": "Slam Dunk",
+      "ch": "Ch. 276",
+      "rating": 4.9,
+      "views": "10.1k",
+      "isNew": false,
+      "img": "../manga-art/slam_dunk.jpg"
+    },
+    {
+      "title": "The Regressed Son of a Duke is an Assassin",
+      "ch": "Ch. 127",
+      "rating": 4.9,
+      "views": "5.5k",
+      "isNew": false,
+      "img": "../manga-art/the_regressed_son_of_a_duke_is_an_assassin.jpg"
+    },
+    {
+      "title": "The Knight Who Only Lives Today",
+      "ch": "Ch. 111",
+      "rating": 4.9,
+      "views": "9.2k",
+      "isNew": true,
+      "img": "../manga-art/the_knight_who_only_lives_today.jpg "
+    },
+    {
+      "title": "Sakamoto Days",
+      "ch": "Ch. 259",
+      "rating": 4.9,
+      "views": "18.8k",
+      "isNew": false,
+      "img": "../manga-art/sakamoto_days.jpg"
+    },
+    {
+      "title": "KIKI",
+      "ch": "Ch. 259",
+      "rating": 4.9,
+      "views": "18.8k",
+      "isNew": false,
+      "img": "../manga-art/sakamoto_days.jpg"
+    },    
+    {
+      "title": "Sakamoto Days",
+      "ch": "Ch. 259",
+      "rating": 4.9,
+      "views": "18.8k",
+      "isNew": false,
+      "img": "../manga-art/sakamoto_days.jpg"
+    },
+    {
+      "title": "Sakamoto Days",
+      "ch": "Ch. 259",
+      "rating": 4.9,
+      "views": "18.8k",
+      "isNew": false,
+      "img": "../manga-art/sakamoto_days.jpg"
+    },
+    {
+      "title": "Sakamoto Days",
+      "ch": "Ch. 259",
+      "rating": 4.9,
+      "views": "18.8k",
+      "isNew": false,
+      "img": "../manga-art/sakamoto_days.jpg"
+    }
+  ]
+} 
+ 

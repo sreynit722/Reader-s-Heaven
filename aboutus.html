@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Reader's Haven</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/aboutus-page.css"> 
+</head>
+<body>
+
+      <!-- Pre-load Theme to prevent Flicker -->
+    <script>
+        (function () {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'light') document.documentElement.classList.add('light-mode');
+        })();
+    </script>
+    <meta name="description"
+        content="Reader's Haven — Discover, read, and track your favorite manga. Browse the latest releases, hot updates, and curated collections in a sleek dark-mode reader.">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>        
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#121212',
+                        card: '#202020',
+                        accent: '#D6336C',
+                        muted: '#A0A0A0',
+                        darker: '#181818',
+                        surface: '#2A2A2A'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    aspectRatio: {
+                        'portrait': '2 / 3',
+                    }
+                }
+            }                                                                                                                                                                                       
+        }
+    </script>
+    <style>
+    .avatar {
+        width: 400px !important;
+        height: 400px !important;
+    }
+    .avatar img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+    }
+    </style> 
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/home-page.css">
+</head>
+
+<body class=" text-white font-sans antialiased overflow-x-hidden min-h-screen flex flex-col">
+    <!-- 1. STICKY HEADER -->
+    <header id="main-header"
+        class="sticky top-0 z-40 bg-darker/95 backdrop-blur-md border-b border-gray-800/60 shadow-lg py-3 px-4 md:px-8 flex justify-between items-center transition-all duration-300">
+ 
+        <!-- Left: Logo -->
+        <a href="index.html" class="flex items-center gap-3 cursor-pointer group" id="logo-link">
+            <span class="font-black text-2xl tracking-wider hidden sm:block text-accent">Reader's Haven</span>
+        </a>
+ 
+        <!-- Center Navigation -->
+        <nav class="hidden lg:flex items-center gap-3 relative">
+            <div class="relative">
+                <button id="btn-browse" 
+                    class="flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md outline-none focus:outline-none">
+                    <span data-i18n="nav.browse">BROWSE CATALOG</span>
+                </button>
+                <!-- Browse Dropdown -->
+                <div id="dropdown-browse"
+                    class="absolute top-full left-0 mt-2 w-48 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 py-2">
+                    <a href="manhwa.html"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="nav.manhwa">Manhwa</a>
+                    <a href="manga.html"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="nav.manga">Manga</a>
+                    <a href="novel.html"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="nav.novel">Novel</a>
+                </div>
+            </div>
+ 
+            <div class="relative">
+                <button id="btn-history"
+                    class="flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md outline-none focus:outline-none">
+                    <span data-i18n="nav.history">MY HISTORY</span>
+                </button>
+                <!-- History Dropdown -->
+                <div id="dropdown-history"
+                    class="absolute top-full left-0 mt-2 w-72 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 overflow-hidden">
+                    <!-- Populated dynamically by home-page.js -->
+                </div>
+            </div>
+ 
+            <div class="relative">
+                <button id="btn-genres"
+                    class="flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md outline-none focus:outline-none">
+                    <span data-i18n="nav.genres">GENRE FILTERS</span>
+                </button>
+                <!-- Genre Dropdown -->
+                <div id="dropdown-genres"
+                    class="absolute top-full left-0 mt-2 w-52 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 py-2">
+                    <a href="new_release.html?action"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="genre.action">Action</a>
+                    <a href="new_release.html?romance"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="genre.romance">Romance</a>
+                    <a href="new_release.html?fantasy"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="genre.fantasy">Fantasy</a>
+                    <a href="new_release.html?horror"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="genre.horror">Horror</a>
+                    <a href="new_release.html?scifi"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="genre.scifi">Sci-Fi</a>
+                </div>
+            </div>
+ 
+            <a href="new_release.html" 
+   class="inline-flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md">
+    <span data-i18n="nav.newReleases">NEW RELEASES</span>
+</a>
+        </nav>
+ 
+        <!-- Right: Actions -->
+        <div class="flex items-center gap-3 sm:gap-5">
+            <!-- Search Bar -->
+            <div
+                class="hidden md:flex items-center bg-card rounded-full px-4 py-2 gap-2 border border-transparent focus-within:border-accent focus-within:shadow-[0_0_12px_rgba(214,51,108,0.2)] transition-all duration-300 relative">
+                <i class="fa-solid fa-magnifying-glass text-muted text-sm"></i>
+                <input type="text" placeholder="Search manga..." data-i18n-placeholder="nav.searchPlaceholder"
+                    class="bg-transparent border-none outline-none text-sm w-36 lg:w-48 text-white placeholder-muted"
+                    id="search-input">
+                <!-- Search Results Dropdown -->
+                <div id="search-results-dropdown"
+                    class="hidden absolute top-full left-0 mt-2 w-80 bg-card/95 backdrop-blur-xl border border-gray-700/50 rounded-2xl shadow-2xl z-50 overflow-hidden max-h-[400px] overflow-y-auto no-scrollbar">
+                </div>
+            </div>
+ 
+
+             <!-- Language Switcher -->
+            <div class="relative">
+                <button id="btn-lang"
+                    class="flex items-center gap-1.5 bg-card hover:bg-gray-800 text-muted hover:text-white px-3 py-2 rounded-full text-xs font-bold transition-all duration-300">
+                    <i class="fa-solid fa-globe text-[11px]"></i>
+                    <span id="lang-current">EN</span>
+                </button>
+                <div id="dropdown-lang"
+                    class="absolute top-full right-0 mt-2 w-36 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 py-2 overflow-hidden">
+                    <button data-lang="en"
+                        class="lang-option w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all text-left">
+                        🇬🇧 <span>English</span>
+                    </button>
+                    <button data-lang="km"
+                        class="lang-option w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all text-left">
+                        🇰🇭 <span>ខ្មែរ</span>
+                    </button>
+                </div>
+            </div>
+
+             <!-- User Avatar -->
+            <div id="header-avatar"
+                class="w-9 h-9 rounded-full bg-surface flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-accent transition-all duration-300 overflow-hidden">
+                 <a href="profile.html" class="w-full h-full flex items-center justify-center"> <i class="fa-solid fa-user text-sm text-muted" id="header-avatar-icon"></i> </a>
+            </div>
+ 
+            <!-- Auth Links -->
+            <div id="header-auth-container"
+                class="hidden sm:flex items-center gap-2.5 border-l border-gray-800/60 pl-4 ml-1">
+                <a href="login.html"
+                    class="text-[11px] font-black text-muted hover:text-accent transition-colors duration-300 tracking-tighter" data-i18n="nav.login">LOG IN</a>
+                <div class="h-3 w-[1px] bg-gray-800/80"></div>
+                <a href="signup.html"
+                    class="text-[11px] font-black text-muted hover:text-accent transition-colors duration-300 tracking-tighter" data-i18n="nav.signup">SIGN UP</a>
+            </div>
+ 
+            <!-- Notification -->
+            <div class="relative cursor-pointer group">
+                <i
+                    class="fa-regular fa-bell text-xl text-muted group-hover:text-accent transition-colors duration-300"></i>
+                <span
+                    class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-darker animate-pulse"></span>
+            </div>
+ 
+            <!-- Hamburger -->
+            <button id="btn-hamburger"
+                class="text-xl text-muted hover:text-accent cursor-pointer transition-colors duration-300 ml-1"
+                aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+ 
+     <!-- SIDEBAR DRAWER -->
+    <div id="sidebar-overlay"
+        class="fixed inset-0 bg-black/60 z-50 opacity-0 invisible transition-all duration-300 backdrop-blur-sm"></div>
+    <aside id="sidebar-drawer"
+        class="fixed top-0 right-[-350px] w-[300px] h-full bg-card shadow-[-10px_0_40px_rgba(0,0,0,0.6)] z-[60] flex flex-col transition-all duration-500 ease-out">
+        <div class="flex justify-between items-center p-6 border-b border-gray-800/50">
+            <div class="flex items-center gap-3">
+                <span class="font-bold text-xl tracking-wide">Reader's Haven</span>
+            </div>
+            <button id="btn-close-sidebar" class="text-2xl text-muted hover:text-accent transition-colors duration-300"
+                aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="p-5 flex flex-col gap-1 flex-grow no-scrollbar overflow-y-auto">
+            <a href="index.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-house w-5 text-center text-muted"></i> <span data-i18n="sidebar.home">Home</span>
+            </a>
+            <a href="new_release.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-compass w-5 text-center text-muted"></i> <span data-i18n="sidebar.explore">Explore</span>
+            </a>
+            <a href="library.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-bookmark w-5 text-center text-muted"></i> <span data-i18n="sidebar.library">My Library</span>
+            </a>
+            <a href="profile.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-user-gear w-5 text-center text-muted"></i> <span data-i18n="sidebar.profile">Profile Settings</span>
+            </a>
+            <a href="#" id="btn-theme-toggle"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-moon w-5 text-center text-muted" id="theme-icon"></i> <span id="theme-text" data-i18n="sidebar.theme">Dark / Light Theme</span>
+            </a>
+            <a href="contact.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-envelope w-5 text-center text-muted"></i> <span data-i18n="sidebar.contact">Contact Us</span>
+            </a>
+             <a href="aboutus.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-circle-info w-5 text-center text-muted"></i> <span data-i18n="sidebar.about">About Us</span>
+            </a>
+             <a href="community.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-users w-5 text-center text-muted"></i> <span data-i18n="sidebar.community">Community</span>
+            </a>
+            <div class="h-px bg-gray-800/50 my-3"></div>
+
+            <!-- Browse Catalog -->
+            <p class="text-[10px] font-black text-accent uppercase tracking-widest px-3.5 pt-2 pb-1" data-i18n="sidebar.browseCatalog">Browse Catalog</p>
+            <a href="manhwa.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-circle w-5 text-center text-muted text-[8px]"></i> <span data-i18n="nav.manhwa">Manhwa (Korean)</span>
+            </a>
+            <a href="manga.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-circle w-5 text-center text-muted text-[8px]"></i> <span data-i18n="nav.manga">Manga (Japanese)</span>
+            </a>
+            <a href="novel.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-circle w-5 text-center text-muted text-[8px]"></i> <span data-i18n="nav.novel">Novels</span>
+            </a>
+
+            <div class="h-px bg-gray-800/50 my-3"></div>
+
+            <!-- Genres -->
+            <p class="text-[10px] font-black text-accent uppercase tracking-widest px-3.5 pt-2 pb-1" data-i18n="sidebar.genres">Genres</p>
+            <div class="grid grid-cols-2 gap-1 px-1">
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.action">Action</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.romance">Romance</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.fantasy">Fantasy</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.horror">Horror</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.scifi">Sci-Fi</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.comedy">Comedy</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.drama">Drama</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.sliceOfLife">Slice of Life</span>
+                </a>
+            </div>
+
+            <div class="h-px bg-gray-800/50 my-3"></div>
+
+            <a href="login.html"
+                class="sidebar-link flex items-center gap-4 text-accent font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+                id="sidebar-auth-btn">
+                <i class="fa-solid fa-right-from-bracket w-5 text-center" id="auth-icon"></i> <span id="auth-text" data-i18n="sidebar.login">Login / Sign Up</span>
+            </a>
+        </div>
+    </aside>
+
+<div class="page">
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-eyebrow" data-i18n="boxdes2"><span>✦</span > <p data-i18n="span.team">The Team Behind the Magic</p>  <span>✦</span></div>
+        <h1 >We Are <br><span class="line-gradient">Reader's Haven</span></h1>
+        <p data-i18n="box.des">A passionate team of four building the ultimate manga, manhwa & novel reading experience — one chapter at a time.</p>
+    </section>
+
+    <!-- Mission + Stats -->
+    <div class="glass mission">
+        <div>
+            <div class="mission-label" data-i18n="box.mission">Our Mission</div>
+            <h2 data-i18n="box.read">Reading should feel like home</h2>
+            <p data-i18n="box.read1">We built Reader's Haven because we believe great stories deserve a great stage. No clutter, no distractions — just you and the story.</p>
+        </div>
+        <div class="mission-divider"></div>
+        <div class="stats">
+            <div>
+                <div class="stat-num" data-i18n="box.number">500+</div>
+                <div class="stat-label" data-i18n="box.title">Titles</div>
+            </div>
+            <div>
+                <div class="stat-num" data-i18n="box.number1">10k+</div>
+                <div class="stat-label" data-i18n="box.title1">Readers</div>
+            </div>
+            <div>
+                <div class="stat-num" data-i18n="box.number2">4</div>
+                <div class="stat-label" data-i18n="box.title2 ">Dreamers</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team -->
+    <div class="section-header">
+        <h2 data-i18n="bio.team">Meet the Team</h2>
+        <div class="section-line"></div>
+    </div>
+
+    <div class="team-grid">
+
+        <!-- Member 1 -->
+        <div class="glass member-card">
+            <div class="member-top">
+                <div class="avatar avatar-1"><img src="./assets/imagine/members/wathana.jpg" alt="Alex Johnson" onerror="this.style.display='none';this.parentElement.innerHTML='A'"></div>
+                <div class="member-info">
+                    <h3 data-i18n="name.wathana">Sam SereyWathana</h3>
+                    <span class="role-badge" data-i18n="tag.wathana">Project and fronted Developer, Researcher</span>
+                </div>
+            </div>
+            <p class="member-bio" data-i18n="bio.wathana">Drives the vision for Reader's Haven from concept to launch. Loves clean interfaces, dark themes, and anything with a good plot twist.</p>
+           
+            <div class="member-socials">
+                <a href="https://www.facebook.com/sereywathana.sam.1" class="social-btn"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/itz_mewathana/" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="glass member-card">
+            <div class="member-top">
+                <div class="avatar avatar-2"><img src="./assets/imagine/members/soaphea1.jpg" alt="Sam Rivera" onerror="this.style.display='none';this.parentElement.innerHTML='S'"></div>
+                <div class="member-info">
+                    <h3 data-i18n="name.soaphea">Loeng ChanSoaphea</h3>
+                    <span class="role-badge" data-i18n="tag.soaphea">Frontend Developer</span>
+                </div>
+            </div>
+            <p class="member-bio" data-i18n="bio.soaphea">The JavaScript wizard keeping everything smooth and interactive. Responsible throughout the site.</p>
+           
+            <div class="member-socials">
+                <a href="https://www.facebook.com/soa.phea.49641" class="social-btn"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="glass member-card">
+            <div class="member-top">
+                <div class="avatar avatar-3"><img src="./assets/imagine/members/somsak1.JPG" alt="Morgan Lee" onerror="this.style.display='none';this.parentElement.innerHTML='M'"></div>
+                <div class="member-info">
+                    <h3 data-i18n="name.somsak">Leap Soksomsak</h3>
+                    <span class="role-badge" data-i18n="tag.somsak">Content & Research</span>
+                </div>
+            </div>
+            <p class="member-bio" data-i18n="bio.somsak">Curates the manga catalog and ensures every title has the right genres, covers, and chapters. The team's resident manga with 30+ titles read.</p>
+          
+            <div class="member-socials">
+                <a href="#" class="social-btn"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://www.instagram.com/eternallysweetened/" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div class="glass member-card">
+            <div class="member-top">
+                <div class="avatar avatar-4"><img src="./assets/imagine/members/lida1.JPG" alt="Chamroeun Pagnalida" onerror="this.style.display='none';this.parentElement.innerHTML='C'"></div>
+                <div class="member-info">
+                    <h3 data-i18n="name.lida">Chamroeun Pagnalida</h3>
+                    <span class="role-badge" data-i18n="tag.lida">Project Developer</span>
+                </div>
+            </div>
+            <p class="member-bio" data-i18n="bio.lida">Built the login, signup, and password reset system. Handles user sessions.</p>
+            <div class="member-socials">
+                <a href="#" class="social-btn"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Values -->
+    <div class="section-header" style="animation-delay:0.4s">
+        <h2 data-i18n="section.dc">What We Stand For</h2>
+        <div class="section-line"></div>
+    </div>
+
+    <div class="values-grid">
+        <div class="glass value-card">
+            <div class="value-icon" style="background:rgba(214,51,108,0.12);color:#D6336C;">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+            <h4 data-i18n="section.dc1">Reader First</h4>
+            <p data-i18n="section.dc2">Every design decision is made with the reader in mind. Clean, distraction-free, and intuitive.</p>
+        </div>
+        <div class="glass value-card">
+            <div class="value-icon" style="background:rgba(124,58,237,0.12);color:#7c3aed;">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h4 data-i18n="section.dc3">Speed & Polish</h4>
+            <p data-i18n="section.dc4">Fast loads, smooth animations, and pixel-perfect UI. We don't ship until it feels right.</p>
+        </div>
+        <div class="glass value-card">
+            <div class="value-icon" style="background:rgba(14,165,233,0.12);color:#0ea5e9;">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h4 data-i18n="section.dc5"> Passion Driven</h4>
+            <p data-i18n="section.dc6">We're fans ourselves. This project exists because we wanted a reader we'd actually use every day.</p>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="glass cta-section">
+        <h2 data-i18n="section.dc7">Start Reading Today</h2>
+        <p data-i18n="section.dc8">Join thousands of readers already enjoying Reader's Haven.</p>
+        <a href="index.html" class="btn-primary">
+            <i class="fa-solid fa-book-open" data-i18n="section.dc9">Browse Catalog</i> 
+        </a>
+    </div>
+
+</div>
+
+ <footer class="bg-darker border-t border-gray-800/50 mt-auto">
+        <!-- Gradient top border accent -->
+        <div class="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"></div>
+        <div class="max-w-[1440px] mx-auto px-6 md:px-10 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- Brand Column -->
+                <div class="flex flex-col gap-3">
+                    <span class="font-black text-xl tracking-wider text-accent">Reader's Haven</span>
+                        <p class="text-muted text-sm leading-relaxed max-w-xs" data-i18n="footer.copyright">Your ultimate destination for manga, 
+                            manhwa, and light novels. Read, discover, and track your favorite series.</p>
+                    <div class="flex gap-3 mt-2">
+                     <a href="https://www.facebook.com/"
+                            class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"><i
+                                class="fa-brands fa-facebook text-sm"></i></a>
+                        <a href="https://web.telegram.org/k/"
+                            class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"><i
+                                class="fa-brands fa-telegram text-sm"></i></a>
+                        <a href="https://discord.com/channels/@me"
+                            class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"><i
+                                class="fa-brands fa-discord text-sm"></i></a>
+                        <a href=""
+                            class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"><i
+                                class="fa-brands fa-github text-sm"></i></a>
+                    </div>
+                </div>
+                <!-- Quick Links -->
+                <div class="flex flex-col gap-2">
+                    <h4 class="font-black text-xs text-white uppercase tracking-widest mb-1" data-i18n="footer.quickLinks">Quick Links</h4>
+                    <a href="new_release.html" class="text-muted text-sm hover:text-accent transition-colors" data-i18n="footer.newReleases">New Releases</a>
+                    <a href="community.html" class="text-muted text-sm hover:text-accent transition-colors" data-i18n="footer.community">Community</a>
+                </div>
+                <!-- Newsletter -->
+                <div class="flex flex-col gap-3">
+                    <h4 class="font-black text-xs text-white uppercase tracking-widest mb-1" data-i18n="footer.stayUpdated">Stay Updated</h4>
+                    <p class="text-muted text-sm" data-i18n="footer.text" data-i18n="footer.text">Get notified about new releases and updates.</p>
+                    <div class="flex gap-2">
+                        <input type="email" data-i18n-placeholder="youremailPlaceholder"  placeholder="Your email" 
+                            class="flex-1 bg-surface border border-gray-800/60 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none focus:border-accent transition-all">
+                        <button
+                            class="px-5 py-2.5 bg-accent hover:bg-accent/85 text-white font-bold text-xs rounded-xl transition-all duration-300 tracking-wider" data-i18n="footer.join">JOIN</button>
+                    </div>
+                </div>
+            </div>
+            <div class="h-px bg-gray-800/50 mb-6"></div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <span class="font-bold text-sm tracking-wider text-accent">Reader's Haven © 2026</span>
+                <div class="flex gap-5 text-muted text-sm">
+                    <a href="contact.html" class="hover:text-accent transition-colors" data-i18n="footer.contact">Contact</a>
+                    <a href="aboutus.html" class="hover:text-accent transition-colors" data-i18n="footer.aboutUs">About Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+ 
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 w-12 h-12 bg-accent text-white rounded-full shadow-2xl opacity-0 translate-y-10 transition-all duration-500 z-50 flex items-center justify-center hover:scale-110 active:scale-95 cursor-pointer pointer-events-none">
+        <i class="fa-solid fa-arrow-up text-lg"></i>
+    </button>
+
+    <!-- Manga Detail Modal -->
+    <div id="manga-detail-modal"
+        class="fixed inset-0 z-50 opacity-0 invisible transition-all duration-300 flex items-center justify-center p-4 backdrop-blur-md bg-black/70">
+        <div
+            class="relative w-full max-w-3xl bg-card border border-gray-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] scale-95 transition-all duration-300">
+            <!-- Header (Close Button) -->
+            <button id="btn-close-detail"
+                class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 hover:bg-accent text-white flex items-center justify-center backdrop-blur-md transition-all duration-300 shadow-md">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Detail Body (Scrollable) -->
+            <div class="overflow-y-auto p-6 md:p-8 space-y-6 no-scrollbar">
+                <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-8">
+                    <!-- Left: Cover -->
+                    <div
+                        class="relative aspect-[2/3] w-full max-w-[200px] mx-auto rounded-2xl overflow-hidden shadow-2xl border border-gray-800">
+                        <img id="detail-cover" src="" alt="" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Right: Info -->
+                    <div class="flex flex-col justify-center space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span id="detail-status"
+                                class="bg-accent text-dark px-2.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider shadow"></span>
+                            <div class="flex items-center gap-1 text-yellow-400 font-bold text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <span id="detail-rating"></span>
+                            </div>
+                            <div class="flex items-center gap-1 text-muted text-xs font-semibold">
+                                <i class="fa-regular fa-eye"></i>
+                                <span id="detail-views"></span>
+                            </div>
+                        </div>
+                        <h2 id="detail-title" class="text-3xl font-black uppercase tracking-tight text-white"></h2>
+                        <p id="detail-desc" class="text-muted text-sm leading-relaxed font-medium"></p>
+                        <div id="detail-genres" class="flex gap-2 flex-wrap pt-2"></div>
+                    </div>
+                </div>
+
+                <div class="h-px bg-gray-800/85"></div>
+
+                <!-- Chapters List -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-black text-white uppercase tracking-tight flex items-center gap-2">
+                        <i class="fa-solid fa-list-ul text-accent"></i> Available Chapters
+                    </h3>
+                    <div id="chapters-list-container"
+                        class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[250px] overflow-y-auto pr-1 no-scrollbar">
+                        <!-- Chapters injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manga Reader Modal -->
+    <div id="manga-reader-modal"
+        class="fixed inset-0 z-50 bg-darker opacity-0 invisible transition-all duration-300 flex flex-col">
+        <!-- Top Toolbar -->
+        <header class="bg-card border-b border-gray-800 px-4 py-3 flex items-center justify-between shadow-lg">
+            <div class="flex items-center gap-3">
+                <button id="btn-reader-back"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <div>
+                    <h4 id="reader-manga-title"
+                        class="font-black text-sm text-white uppercase tracking-wider truncate max-w-[150px] sm:max-w-[300px]">
+                    </h4>
+                    <span id="reader-chapter-title" class="text-xs text-muted font-bold"></span>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex items-center gap-2">
+                <!-- Mode Toggle (Scroll vs Page) -->
+                <button id="btn-reader-mode"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300"
+                    title="Switch Reading Mode">
+                    <i class="fa-solid fa-scroll"></i>
+                </button>
+                <!-- Settings Button -->
+                <button id="btn-reader-settings"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300"
+                    title="Reader Settings">
+                    <i class="fa-solid fa-sliders"></i>
+                </button>
+                <div class="h-6 w-px bg-gray-800 mx-1"></div>
+                <!-- Prev / Next Chapter Buttons -->
+                <button id="btn-reader-prev-ch"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none"
+                    title="Previous Chapter">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button id="btn-reader-next-ch"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none"
+                    title="Next Chapter">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="h-6 w-px bg-gray-800 mx-1"></div>
+                <!-- Close Reader (Go directly back to homepage) -->
+                <button id="btn-reader-close"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300"
+                    title="Close Reader">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Settings Panel -->
+        <div id="reader-settings-panel"
+            class="absolute top-16 right-4 z-50 bg-card/95 backdrop-blur-xl border border-gray-800 rounded-3xl p-5 w-72 shadow-2xl transition-all duration-300 transform scale-95 opacity-0 invisible flex flex-col gap-4">
+            <h5 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-accent"></i> Reader Settings
+            </h5>
+
+            <!-- Theme Selection -->
+            <div>
+                <label class="text-[10px] text-muted font-black tracking-wider uppercase block mb-2">Background
+                    Color</label>
+                <div class="grid grid-cols-4 gap-2">
+                    <button data-theme="dark"
+                        class="h-8 rounded-lg bg-black border border-gray-800 hover:scale-105 active:scale-95 transition-all text-[10px] font-black text-white"
+                        title="Pitch Dark">Dark</button>
+                    <button data-theme="charcoal"
+                        class="h-8 rounded-lg bg-[#1a1a1a] border border-gray-800 hover:scale-105 active:scale-95 transition-all text-[10px] font-black text-white"
+                        title="Charcoal">Gray</button>
+                    <button data-theme="sepia"
+                        class="h-8 rounded-lg bg-[#f4ecd8] border border-amber-900/20 hover:scale-105 active:scale-95 transition-all text-[10px] font-black text-amber-950"
+                        title="Sepia">Sepia</button>
+                    <button data-theme="light"
+                        class="h-8 rounded-lg bg-white border border-gray-300 hover:scale-105 active:scale-95 transition-all text-[10px] font-black text-black"
+                        title="Light">Light</button>
+                </div>
+            </div>
+
+            <!-- Page Width Selection -->
+            <div>
+                <label class="text-[10px] text-muted font-black tracking-wider uppercase block mb-2">Max Page
+                    Width</label>
+                <div class="grid grid-cols-3 gap-2">
+                    <button data-width="600"
+                        class="py-1.5 rounded-lg bg-surface hover:bg-accent hover:text-white border border-gray-800 text-[10px] font-bold text-white transition-all duration-300">Narrow</button>
+                    <button data-width="750"
+                        class="py-1.5 rounded-lg bg-accent text-white border border-transparent text-[10px] font-bold transition-all duration-300">Default</button>
+                    <button data-width="950"
+                        class="py-1.5 rounded-lg bg-surface hover:bg-accent hover:text-white border border-gray-800 text-[10px] font-bold text-white transition-all duration-300">Wide</button>
+                </div>
+            </div>
+
+            <!-- Page Scale / Zoom Selection -->
+            <div>
+                <label class="text-[10px] text-muted font-black tracking-wider uppercase block mb-2">Page Zoom</label>
+                <div class="flex items-center gap-3">
+                    <button id="btn-zoom-out"
+                        class="w-8 h-8 rounded-lg bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-xs font-bold text-white border border-gray-800 transition-all duration-300">-</button>
+                    <span id="zoom-indicator" class="flex-grow text-center text-xs font-bold text-white">100%</span>
+                    <button id="btn-zoom-in"
+                        class="w-8 h-8 rounded-lg bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-xs font-bold text-white border border-gray-800 transition-all duration-300">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reader Canvas (Scrollable Pages) -->
+        <div id="reader-canvas"
+            class="flex-grow overflow-y-auto p-4 md:p-8 flex flex-col items-center gap-6 no-scrollbar bg-dark select-none">
+            <!-- Reader content injected by JS -->
+        </div>
+
+        <!-- Bottom Toolbar (For Page Navigation in Slide Mode) -->
+        <footer id="reader-footer"
+            class="bg-card border-t border-gray-800 px-4 py-3 flex items-center justify-between shadow-lg">
+            <button id="btn-reader-prev-page"
+                class="px-4 py-2 rounded-full bg-surface hover:bg-accent hover:text-white text-xs font-black tracking-wider text-muted transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none">PREV
+                PAGE</button>
+            <span id="reader-page-indicator" class="text-xs text-muted font-black tracking-wider">PAGE 1 / 10</span>
+            <button id="btn-reader-next-page"
+                class="px-4 py-2 rounded-full bg-surface hover:bg-accent hover:text-white text-xs font-black tracking-wider text-muted transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none">NEXT
+                PAGE</button>
+        </footer>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        if (window.pdfjsLib) {
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+    </script>
+    <script src="./manga-data/manga-data.js"></script>
+    <script src="./assets/js/home-page.js"></script>
+    <script src="./assets/js/i18n.js"></script>
+</body>
+</html>

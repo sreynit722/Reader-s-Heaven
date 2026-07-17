@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Releases | Reader's Haven</title>
+
+  <!-- Prevent theme flicker (same as index.html) -->
+  <script>
+    (function(){
+      const t=localStorage.getItem('theme');
+      if(t==='light') document.documentElement.classList.add('light-mode');
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind config — identical to index.html -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark:    '#121212',
+            card:    '#202020',
+            accent:  '#D6336C',
+            muted:   '#A0A0A0',
+            darker:  '#181818',
+            surface: '#2A2A2A'
+          },
+          fontFamily: { sans: ['Inter','sans-serif'] }
+        }
+      }
+    }
+  </script>
+
+  <!-- Shared styles from index, plus this page's styles -->
+  <link rel="stylesheet" href="./assets/css/home-page.css">
+  <link rel="stylesheet" href="./assets/css/new_release-page.css">
+</head>
+
+<body class="bg-dark text-white font-sans antialiased overflow-x-hidden min-h-screen flex flex-col">
+
+     <!-- 1. STICKY HEADER -->
+    <header id="main-header"
+        class="sticky top-0 z-40 bg-darker/95 backdrop-blur-md border-b border-gray-800/60 shadow-lg py-3 px-4 md:px-8 flex justify-between items-center transition-all duration-300">
+ 
+        <!-- Left: Logo -->
+        <a href="index.html" class="flex items-center gap-3 cursor-pointer group" id="logo-link">
+            <span class="font-black text-2xl tracking-wider hidden sm:block text-accent">Reader's Haven</span>
+        </a>
+ 
+        <!-- Center Navigation -->
+        <nav class="hidden lg:flex items-center gap-3 relative">
+            <div class="relative">
+                <button id="btn-browse" 
+                    class="flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md">
+                    <span data-i18n="nav.browse">BROWSE CATALOG</span>
+                </button>
+                <!-- Browse Dropdown -->
+                <div id="dropdown-browse"
+                    class="absolute top-full left-0 mt-2 w-48 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 py-2">
+                    <a href="manhwa.html"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="nav.manhwa">Manhwa</a>
+                    <a href="manga.html"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="nav.manga">Manga</a>
+                    <a href="novel.html"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="nav.novel">Novel</a>
+                </div>
+            </div>
+ 
+            <div class="relative">
+                <button id="btn-history"
+                    class="flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md">
+                    <span data-i18n="nav.history">MY HISTORY</span>
+                </button>
+                <!-- History Dropdown -->
+                <div id="dropdown-history"
+                    class="absolute top-full left-0 mt-2 w-72 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 overflow-hidden">
+                    <!-- Populated dynamically by home-page.js -->
+                </div>
+            </div>
+ 
+            <div class="relative">
+                <button id="btn-genres"
+                    class="flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md">
+                    <span data-i18n="nav.genres">GENRE FILTERS</span>
+                </button>
+                <!-- Genre Dropdown -->
+               <div id="dropdown-genres"
+                    class="absolute top-full left-0 mt-2 w-52 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 py-2">
+                    <a href="new_release.html?action"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="genre.action">Action</a>
+                    <a href="new_release.html?romance"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="genre.romance">Romance</a>
+                    <a href="new_release.html?fantasy"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="genre.fantasy">Fantasy</a>
+                    <a href="new_release.html?horror"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="genre.horror">Horror</a>
+                    <a href="new_release.html?scifi"
+                        class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all" data-i18n="genre.scifi">Sci-Fi</a>
+                </div>
+            </div>
+ 
+            <a href="new_release.html" 
+   class="inline-flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md">
+    <span data-i18n="nav.newReleases">NEW RELEASES</span>
+</a>
+        </nav>
+ 
+        <!-- Right: Actions -->
+        <div class="flex items-center gap-3 sm:gap-5">
+            <!-- Search Bar -->
+            <div
+                class="hidden md:flex items-center bg-card rounded-full px-4 py-2 gap-2 border border-transparent focus-within:border-accent focus-within:shadow-[0_0_12px_rgba(214,51,108,0.2)] transition-all duration-300 relative">
+                <i class="fa-solid fa-magnifying-glass text-muted text-sm"></i>
+                <input type="text" placeholder="Search manga..." data-i18n-placeholder="nav.searchPlaceholder"
+                    class="bg-transparent border-none outline-none text-sm w-36 lg:w-48 text-white placeholder-muted"
+                    id="search-input">
+                <!-- Search Results Dropdown -->
+                <div id="search-results-dropdown"
+                    class="hidden absolute top-full left-0 mt-2 w-80 bg-card/95 backdrop-blur-xl border border-gray-700/50 rounded-2xl shadow-2xl z-50 overflow-hidden max-h-[400px] overflow-y-auto no-scrollbar">
+                </div>
+            </div>
+ 
+
+             <!-- Language Switcher -->
+            <div class="relative">
+                <button id="btn-lang"
+                    class="flex items-center gap-1.5 bg-card hover:bg-gray-800 text-muted hover:text-white px-3 py-2 rounded-full text-xs font-bold transition-all duration-300">
+                    <i class="fa-solid fa-globe text-[11px]"></i>
+                    <span id="lang-current">EN</span>
+                </button>
+                <div id="dropdown-lang"
+                    class="absolute top-full right-0 mt-2 w-36 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 py-2 overflow-hidden">
+                    <button data-lang="en"
+                        class="lang-option w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all text-left">
+                        🇬🇧 <span>English</span>
+                    </button>
+                    <button data-lang="km"
+                        class="lang-option w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all text-left">
+                        🇰🇭 <span>ខ្មែរ</span>
+                    </button>
+                </div>
+            </div>
+
+             <!-- User Avatar -->
+            <div id="header-avatar"
+                class="w-9 h-9 rounded-full bg-surface flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-accent transition-all duration-300 overflow-hidden">
+                 <a href="profile.html" class="w-full h-full flex items-center justify-center"> <i class="fa-solid fa-user text-sm text-muted" id="header-avatar-icon"></i> </a>
+            </div>
+ 
+            <!-- Auth Links -->
+            <div id="header-auth-container"
+                class="hidden sm:flex items-center gap-2.5 border-l border-gray-800/60 pl-4 ml-1">
+                <a href="login.html"
+                    class="text-[11px] font-black text-muted hover:text-accent transition-colors duration-300 tracking-tighter" data-i18n="nav.login">LOG IN</a>
+                <div class="h-3 w-[1px] bg-gray-800/80"></div>
+                <a href="signup.html"
+                    class="text-[11px] font-black text-muted hover:text-accent transition-colors duration-300 tracking-tighter" data-i18n="nav.signup">SIGN UP</a>
+            </div>
+
+             <i
+            class="fa-regular fa-bookmark text-xl text-muted group-hover:text-accent transition-colors duration-300"
+          ></i>
+        </a>
+ 
+            <!-- Notification -->
+            <div class="relative cursor-pointer group">
+                <i
+                    class="fa-regular fa-bell text-xl text-muted group-hover:text-accent transition-colors duration-300"></i>
+                <span
+                    class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-darker animate-pulse"></span>
+            </div>
+ 
+            <!-- Hamburger -->
+            <button id="btn-hamburger"
+                class="text-xl text-muted hover:text-accent cursor-pointer transition-colors duration-300 ml-1"
+                aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+ 
+     <!-- SIDEBAR DRAWER -->
+    <div id="sidebar-overlay"
+        class="fixed inset-0 bg-black/60 z-50 opacity-0 invisible transition-all duration-300 backdrop-blur-sm"></div>
+    <aside id="sidebar-drawer"
+        class="fixed top-0 right-[-350px] w-[300px] h-full bg-card shadow-[-10px_0_40px_rgba(0,0,0,0.6)] z-[60] flex flex-col transition-all duration-500 ease-out">
+        <div class="flex justify-between items-center p-6 border-b border-gray-800/50">
+            <div class="flex items-center gap-3">
+                <span class="font-bold text-xl tracking-wide">Reader's Haven</span>
+            </div>
+            <button id="btn-close-sidebar" class="text-2xl text-muted hover:text-accent transition-colors duration-300"
+                aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="p-5 flex flex-col gap-1 flex-grow no-scrollbar overflow-y-auto">
+            <a href="index.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-house w-5 text-center text-muted"></i> <span data-i18n="sidebar.home">Home</span>
+            </a>
+            <a href="new_release.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-compass w-5 text-center text-muted"></i> <span data-i18n="sidebar.explore">Explore</span>
+            </a>
+            <a href="library.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-bookmark w-5 text-center text-muted"></i> <span data-i18n="sidebar.library">My Library</span>
+            </a>
+            <a href="profile.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-user-gear w-5 text-center text-muted"></i> <span data-i18n="sidebar.profile">Profile Settings</span>
+            </a>
+            <a href="#" id="btn-theme-toggle"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-moon w-5 text-center text-muted" id="theme-icon"></i> <span id="theme-text" data-i18n="sidebar.theme">Dark / Light Theme</span>
+            </a>
+            <a href="contact.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-envelope w-5 text-center text-muted"></i> <span data-i18n="sidebar.contact">Contact Us</span>
+            </a>
+             <a href="aboutus.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-circle-info w-5 text-center text-muted"></i> <span data-i18n="sidebar.about">About Us</span>
+            </a>
+             <a href="community.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-users w-5 text-center text-muted"></i> <span data-i18n="sidebar.community">Community</span>
+            </a>
+            <div class="h-px bg-gray-800/50 my-3"></div>
+
+            <!-- Browse Catalog -->
+            <p class="text-[10px] font-black text-accent uppercase tracking-widest px-3.5 pt-2 pb-1" data-i18n="sidebar.browseCatalog">Browse Catalog</p>
+            <a href="manhwa.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-circle w-5 text-center text-muted text-[8px]"></i> <span data-i18n="nav.manhwa">Manhwa (Korean)</span>
+            </a>
+            <a href="manga.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-circle w-5 text-center text-muted text-[8px]"></i> <span data-i18n="nav.manga">Manga (Japanese)</span>
+            </a>
+            <a href="novel.html"
+                class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2">
+                <i class="fa-solid fa-circle w-5 text-center text-muted text-[8px]"></i> <span data-i18n="nav.novel">Novels</span>
+            </a>
+
+            <div class="h-px bg-gray-800/50 my-3"></div>
+
+            <!-- Genres -->
+            <p class="text-[10px] font-black text-accent uppercase tracking-widest px-3.5 pt-2 pb-1" data-i18n="sidebar.genres">Genres</p>
+            <div class="grid grid-cols-2 gap-1 px-1">
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.action">Action</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.romance">Romance</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.fantasy">Fantasy</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.horror">Horror</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.scifi">Sci-Fi</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.comedy">Comedy</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.drama">Drama</span>
+                </a>
+                <a href="new_release.html" class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200">
+                    <span class="text-accent text-xs">#</span> <span data-i18n="genre.sliceOfLife">Slice of Life</span>
+                </a>
+            </div>
+
+            <div class="h-px bg-gray-800/50 my-3"></div>
+
+            <a href="login.html"
+                class="sidebar-link flex items-center gap-4 text-accent font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+                id="sidebar-auth-btn">
+                <i class="fa-solid fa-right-from-bracket w-5 text-center" id="auth-icon"></i> <span id="auth-text" data-i18n="sidebar.login">Login / Sign Up</span>
+            </a>
+        </div>
+    </aside>
+    
+    <!-- page header -->
+<div class="page-header">
+  <div class="accent-bar"></div>
+  <div>
+    <h1 data-i18n="header.new-releases">New Releases</h1>
+    <p style="font-size:.8rem;color:#A0A0A0;margin-top:4px;" data-i18n="header.new-releases.description">The freshest titles added to the catalog</p>
+  </div>
+</div>
+
+    <!-- main content -->
+<div class="container">
+
+  <!-- Search row -->
+  <div class="search-row">
+    <div class="search-wrap">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" placeholder="Search by title..." id="searchInput" data-i18n-placeholder="header.searchPlaceholder"/>
+    </div>
+    <button class="btn-search" onclick="doSearch()" data-i18n="filter.search">Search</button>
+  </div>
+
+  <!-- Glass filter panel -->
+  <div class="filter-panel">
+
+    <!-- Demographic -->
+    <div>
+      <div class="filter-section-label" data-i18n="filter.target">Target Demographic</div>
+      <div class="tag-group" id="demographic">
+        <button class="tag" onclick="toggleTag(this)" data-i18n="filter.shounen">Shounen</button>
+        <button class="tag" onclick="toggleTag(this)" data-i18n="filter.shoujo">Shoujo</button>
+        <button class="tag" onclick="toggleTag(this)" data-i18n="filter.seinen">Seinen</button>
+        <button class="tag" onclick="toggleTag(this)" data-i18n="filter.josei">Josei</button>
+      </div>
+    </div>
+
+    <div style="height:1px;background:rgba(255,255,255,.05)"></div>
+
+    <!-- Sort + Status -->
+    <div class="row-two">
+      <div>
+        <div class="filter-section-label" data-i18n="filter.sort">Sort By</div>
+        <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+          <option value="relevance" data-i18n="filter.relevance">Relevance</option>
+          <option value="az" data-i18n="filter.az">A – Z</option>
+          <option value="za" data-i18n="filter.za">Z – A</option>
+          <option value="ongoing" data-i18n="filter.ongoing">Ongoing First</option>
+          <option value="completed" data-i18n="filter.completed">Completed First</option>
+        </select>
+      </div>
+      <div>
+        <div class="filter-section-label" data-i18n="filter.status">Status</div>
+        <div class="tag-group" id="status">
+          <button class="tag" onclick="toggleTag(this)" data-i18n="filter.ongoing">Ongoing</button>
+          <button class="tag" onclick="toggleTag(this)" data-i18n="filter.completed">Completed</button>
+          <button class="tag" onclick="toggleTag(this)" data-i18n="filter.hiatus">Hiatus</button>
+          <button class="tag" onclick="toggleTag(this)" data-i18n="filter.cancelled">Cancelled</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:1px;background:rgba(255,255,255,.05)"></div>
+
+    <!-- Advanced genre filters -->
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:10px;">
+        <div class="filter-section-label" style="margin-bottom:0" data-i18n="filter.advanced-genres">Advanced Genres Filters</div>
+        <div class="legend">
+          <div class="legend-item"><div class="dot included"></div> Included</div>
+          <div class="legend-item"><div class="dot excluded"></div> Excluded</div>
+          <div class="legend-item"><div class="dot neutral"></div> Neutral</div>
+        </div>
+      </div>
+      <div class="genre-grid" id="genres">
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.action">Action</button>
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.adventure">Adventure</button>
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.comedy">Comedy</button>
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.drama">Drama</button>
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.fantasy">Fantasy</button>
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.horror">Horror</button>
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.mystery">Mystery</button>
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.romance">Romance</button>
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.scifi">Sci-Fi</button>
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.sliceOfLife">Slice of Life</button>
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.sports">Sports</button>
+        <button class="genre-btn" onclick="cycleGenre(this)" data-i18n="genre.thriller">Thriller</button>
+      </div>
+    </div>
+  </div><!-- /filter-panel -->
+
+  <!-- Results header -->
+  <div class="results-header">
+    <h2>
+      <span data-i18n="new-releases.results-prefix">Showing</span>
+      <span id="countLabel" class="text-accent font-black mx-1">0</span>
+      <span data-i18n="new-releases.results-suffix">New Titles</span>
+    </h2>
+    <button class="btn-reset" onclick="resetFilters()">
+      <i class="fa-solid fa-rotate-left" style="font-size:.65rem"></i> <span data-i18n="filter.reset">Reset Filters</span>
+    </button>
+  </div>
+
+  <!-- Card grid -->
+  <div class="card-grid" id="cardGrid">
+    <!-- Cards injected automatically by JS from manga-data.js -->
+  </div><!-- /card-grid -->
+
+  <!-- Empty state -->
+  <div class="empty-state" id="emptyState">
+    <i class="fa-solid fa-book-open"></i>
+    <p>No titles match your filters.</p>
+    <button onclick="resetFilters()">Reset Filters</button>
+  </div>
+
+</div><!-- /container -->
+
+ <footer class="bg-darker border-t border-gray-800/50 mt-auto">
+        <!-- Gradient top border accent -->
+        <div class="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"></div>
+        <div class="max-w-[1440px] mx-auto px-6 md:px-10 py-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- Brand Column -->
+                <div class="flex flex-col gap-3">
+                    <span class="font-black text-xl tracking-wider text-accent">Reader's Haven</span>
+                        <p class="text-muted text-sm leading-relaxed max-w-xs" data-i18n="footer.copyright">Your ultimate destination for manga, 
+                            manhwa, and light novels. Read, discover, and track your favorite series.</p>
+                    <div class="flex gap-3 mt-2">
+                      <a href="https://www.facebook.com/"
+                            class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"><i
+                                class="fa-brands fa-facebook text-sm"></i></a>
+                        <a href="https://web.telegram.org/k/"
+                            class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"><i
+                                class="fa-brands fa-telegram text-sm"></i></a>
+                        <a href="https://discord.com/channels/@me"
+                            class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"><i
+                                class="fa-brands fa-discord text-sm"></i></a>
+                        <a href=""
+                            class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"><i
+                                class="fa-brands fa-github text-sm"></i></a>
+                    </div>
+                </div>
+                <!-- Quick Links -->
+                <div class="flex flex-col gap-2">
+                    <h4 class="font-black text-xs text-white uppercase tracking-widest mb-1" data-i18n="footer.quickLinks">Quick Links</h4>
+                    <a href="new_release.html" class="text-muted text-sm hover:text-accent transition-colors" data-i18n="footer.newReleases">New Releases</a>
+                    <a href="community.html" class="text-muted text-sm hover:text-accent transition-colors" data-i18n="footer.community">Community</a>
+                </div>
+                <!-- Newsletter -->
+                <div class="flex flex-col gap-3">
+                    <h4 class="font-black text-xs text-white uppercase tracking-widest mb-1" data-i18n="footer.stayUpdated">Stay Updated</h4>
+                    <p class="text-muted text-sm" data-i18n="footer.text">Get notified about new releases and updates.</p>
+                    <div class="flex gap-2">
+                        <input type="email" data-i18n-placeholder="youremailPlaceholder"  placeholder="Your email" 
+                            class="flex-1 bg-surface border border-gray-800/60 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none focus:border-accent transition-all">
+                        <button
+                            class="px-5 py-2.5 bg-accent hover:bg-accent/85 text-white font-bold text-xs rounded-xl transition-all duration-300 tracking-wider" data-i18n="footer.join">JOIN</button>
+                    </div>
+                </div>
+            </div>
+            <div class="h-px bg-gray-800/50 mb-6"></div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <span class="font-bold text-sm tracking-wider text-accent">Reader's Haven © 2026</span>
+                <div class="flex gap-5 text-muted text-sm">
+                    <a href="contact.html" class="hover:text-accent transition-colors" data-i18n="footer.contact">Contact</a>
+                    <a href="aboutus.html" class="hover:text-accent transition-colors" data-i18n="footer.aboutUs">About Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+ 
+        <!-- Full-Screen Manga Detail Page -->
+    <div
+      id="manga-detail-modal"
+      class="fixed inset-0 z-[55] bg-darker opacity-0 invisible transition-all duration-300 flex flex-col overflow-hidden"
+    >
+      <!-- Detail Page Header -->
+      <header
+        class="sticky top-0 z-10 bg-darker/95 backdrop-blur-md border-b border-gray-800/60 px-4 py-3 flex items-center gap-3 shadow-lg flex-shrink-0"
+      >
+        <button
+          id="btn-close-detail"
+          class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300 flex-shrink-0"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <span
+          class="font-black text-sm text-white uppercase tracking-wider truncate"
+          id="detail-header-title"
+          >Reader's Haven</span
+        >
+        <div class="ml-auto flex items-center gap-2">
+          <button
+            class="w-9 h-9 rounded-full bg-surface hover:bg-accent/10 flex items-center justify-center text-muted hover:text-accent transition-all duration-300"
+            title="Add to library"
+            data-i18n-title="detail.addToLibrary"
+          >
+            <i class="fa-regular fa-bookmark text-sm"></i>
+          </button>
+          <button
+            class="w-9 h-9 rounded-full bg-surface hover:bg-accent/10 flex items-center justify-center text-muted hover:text-accent transition-all duration-300"
+            title="Share"
+            data-i18n-title="detail.share"
+          >
+            <i class="fa-solid fa-share-nodes text-sm"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Scrollable Body -->
+      <div class="flex-grow overflow-y-auto no-scrollbar" id="detail-page-body">
+        <!-- Hero Banner -->
+        <div class="relative">
+          <div
+            id="detail-bg-blur"
+            class="absolute inset-0 bg-cover bg-center filter blur-3xl opacity-15 scale-110 pointer-events-none"
+          ></div>
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-darker/30 via-darker/60 to-darker pointer-events-none"
+          ></div>
+          <div class="relative z-10 max-w-5xl mx-auto px-4 md:px-8 pt-8 pb-6">
+            <div class="flex flex-col sm:flex-row gap-6 md:gap-8 items-start">
+              <!-- Cover Art -->
+              <div class="flex-shrink-0 w-36 sm:w-44 md:w-52">
+                <div
+                  class="aspect-[2/3] rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] border border-gray-800/60"
+                >
+                  <img
+                    id="detail-cover"
+                    src=""
+                    alt=""
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+              <!-- Info Panel -->
+              <div class="flex flex-col gap-4 flex-grow pt-1">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span
+                    id="detail-status"
+                    class="bg-accent text-white px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-widest shadow-lg shadow-accent/20"
+                  ></span>
+                  <span
+                    id="detail-pub-year"
+                    class="text-muted text-[11px] font-semibold"
+                  ></span>
+                  <span class="w-1 h-1 rounded-full bg-gray-700"></span>
+                  <span
+                    id="detail-type-badge"
+                    class="text-muted text-[11px] font-semibold uppercase"
+                    data-i18n="nav.manga"
+                    >Manga</span
+                  >
+                </div>
+                <div>
+                  <h1
+                    id="detail-title"
+                    class="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight tracking-tight mb-1"
+                  ></h1>
+                  <p
+                    id="detail-alt-title"
+                    class="text-muted text-sm font-medium"
+                  ></p>
+                </div>
+                <div class="flex items-center gap-4 flex-wrap">
+                  <div class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-star text-yellow-400 text-sm"></i>
+                    <span
+                      id="detail-rating"
+                      class="text-white font-black text-sm"
+                    ></span>
+                    <span class="text-muted text-xs font-medium">/10</span>
+                  </div>
+                  <div
+                    class="flex items-center gap-1.5 text-muted text-xs font-semibold"
+                  >
+                    <i class="fa-regular fa-eye text-xs"></i>
+                    <span id="detail-views"></span>
+                  </div>
+                  <div
+                    class="flex items-center gap-1.5 text-muted text-xs font-semibold"
+                  >
+                    <i class="fa-regular fa-comment text-xs"></i>
+                    <span id="detail-comments">4</span>
+                  </div>
+                </div>
+                <div id="detail-genres" class="flex gap-2 flex-wrap"></div>
+                <p
+                  id="detail-desc"
+                  class="text-muted text-sm leading-relaxed font-medium max-w-2xl"
+                ></p>
+                <div class="flex items-center gap-2 flex-wrap mt-1">
+                  <button
+                    id="detail-read-btn"
+                    class="flex items-center gap-2 bg-accent hover:bg-accent/85 text-white font-black px-5 py-2.5 rounded-full text-xs tracking-wider shadow-lg shadow-accent/25 transition-all duration-300 hover:scale-105 active:scale-95"
+                  >
+                    <i class="fa-regular fa-bell"></i>
+                    <span data-i18n="library.statusReading">Reading</span>
+                  </button>
+                  <button
+                    class="flex items-center gap-2 bg-surface hover:bg-gray-800 border border-gray-800/60 text-muted hover:text-white font-bold px-4 py-2.5 rounded-full text-xs tracking-wider transition-all duration-300"
+                  >
+                    <i class="fa-regular fa-star"></i>
+                  </button>
+                  <div
+                    class="relative inline-block text-left"
+                    id="detail-add-to-list-container"
+                  >
+                    <button
+                      id="detail-add-to-list-btn"
+                      class="flex items-center gap-2 bg-surface hover:bg-gray-800 border border-gray-800/60 text-muted hover:text-white font-bold px-4 py-2.5 rounded-full text-xs tracking-wider transition-all duration-300"
+                    >
+                      <i class="fa-solid fa-list-ul"></i>
+                      <span
+                        id="detail-add-to-list-text"
+                        data-i18n="detail.addToList"
+                        >Add to List</span
+                      >
+                    </button>
+                    <!-- Drop-up menu -->
+                    <div
+                      id="detail-list-dropdown"
+                      class="absolute bottom-full mb-2 left-0 mt-2 w-52 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 py-2"
+                    >
+                      <button
+                        data-status="Reading"
+                        class="list-status-option w-full text-left px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all flex items-center gap-2"
+                      >
+                        <i class="fa-regular fa-bell text-xs"></i>
+                        <span data-i18n="library.statusReading">Reading</span>
+                      </button>
+                      <button
+                        data-status="Plan"
+                        class="list-status-option w-full text-left px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all flex items-center gap-2"
+                      >
+                        <i class="fa-regular fa-bookmark text-xs"></i>
+                        <span data-i18n="library.statusPlan">Plan to Read</span>
+                      </button>
+                      <button
+                        data-status="Completed"
+                        class="list-status-option w-full text-left px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all flex items-center gap-2"
+                      >
+                        <i class="fa-regular fa-circle-check text-xs"></i>
+                        <span data-i18n="library.statusCompleted"
+                          >Completed</span
+                        >
+                      </button>
+                      <button
+                        data-status="Hold"
+                        class="list-status-option w-full text-left px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all flex items-center gap-2"
+                      >
+                        <i class="fa-regular fa-circle-pause text-xs"></i>
+                        <span data-i18n="library.statusHold">On Hold</span>
+                      </button>
+                      <button
+                        data-status="Dropped"
+                        class="list-status-option w-full text-left px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all flex items-center gap-2"
+                      >
+                        <i class="fa-regular fa-circle-xmark text-xs"></i>
+                        <span data-i18n="library.statusDropped">Dropped</span>
+                      </button>
+                      <button
+                        data-status="Rereading"
+                        class="list-status-option w-full text-left px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all flex items-center gap-2"
+                      >
+                        <i class="fa-solid fa-arrows-rotate text-xs"></i>
+                        <span data-i18n="library.statusRereading"
+                          >Re-Reading</span
+                        >
+                      </button>
+                      <div class="h-px bg-gray-700/50 my-1"></div>
+                      <button
+                        id="btn-remove-from-list"
+                        class="w-full text-left px-5 py-2.5 text-sm text-red-400 hover:bg-red-500/5 transition-all flex items-center gap-2"
+                      >
+                        <i class="fa-regular fa-trash-can text-xs"></i>
+                        <span data-i18n="library.remove"
+                          >Remove from library</span
+                        >
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    id="detail-start-reading-btn"
+                    class="flex items-center gap-2 bg-surface hover:bg-gray-800 border border-gray-800/60 text-muted hover:text-white font-bold px-5 py-2.5 rounded-full text-xs tracking-wider transition-all duration-300"
+                  >
+                    <i class="fa-solid fa-book-open"></i>
+                    <span data-i18n="detail.startReading">Start Reading</span>
+                  </button>
+                  <button
+                    class="w-9 h-9 rounded-full bg-surface hover:bg-accent/10 border border-gray-800/60 flex items-center justify-center text-muted hover:text-accent transition-all duration-300"
+                  >
+                    <i class="fa-solid fa-flag text-xs"></i>
+                  </button>
+                  <button
+                    class="w-9 h-9 rounded-full bg-surface hover:bg-accent/10 border border-gray-800/60 flex items-center justify-center text-muted hover:text-accent transition-all duration-300"
+                  >
+                    <i class="fa-solid fa-arrow-up-from-bracket text-xs"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+            <!-- Tab Bar -->
+            <div class="sticky top-[57px] z-10 bg-darker/95 backdrop-blur-md border-b border-gray-800/60">
+                <div class="max-w-5xl mx-auto px-4 md:px-8 flex items-center gap-1 overflow-x-auto no-scrollbar">
+                    <button class="detail-tab active flex-shrink-0 px-4 py-3.5 text-xs font-black uppercase tracking-wider border-b-2 transition-all duration-300" data-tab="chapters">Chapters</button>
+                    <button class="detail-tab flex-shrink-0 px-4 py-3.5 text-xs font-black uppercase tracking-wider border-b-2 transition-all duration-300" data-tab="comments">Comments (4)</button>
+                    <button class="detail-tab flex-shrink-0 px-4 py-3.5 text-xs font-black uppercase tracking-wider border-b-2 transition-all duration-300" data-tab="art">Art</button>
+                    <button class="detail-tab flex-shrink-0 px-4 py-3.5 text-xs font-black uppercase tracking-wider border-b-2 transition-all duration-300" data-tab="related">Related</button>
+                    <button class="detail-tab flex-shrink-0 px-4 py-3.5 text-xs font-black uppercase tracking-wider border-b-2 transition-all duration-300" data-tab="recommendations">Recommendations</button>
+                </div>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="max-w-5xl mx-auto px-4 md:px-8 py-6 flex flex-col lg:flex-row gap-8">
+                <!-- Left: Panels -->
+                <div class="flex-grow min-w-0">
+                    <!-- CHAPTERS TAB -->
+                    <div id="tab-chapters" class="detail-tab-panel">
+                        <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+                            <div class="flex items-center gap-2 ml-auto flex-wrap">
+                                <button class="flex items-center gap-1.5 bg-surface hover:bg-gray-800 border border-gray-800 text-muted hover:text-white px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all duration-300">
+                                    <i class="fa-solid fa-arrow-down-wide-short text-[10px]"></i> Descending
+                                </button>
+                                <div class="flex items-center gap-1" id="chapter-page-nav">
+                                    <button id="ch-page-prev" class="w-7 h-7 rounded-lg bg-surface border border-gray-800 flex items-center justify-center text-muted hover:text-white hover:bg-gray-800 transition-all text-xs disabled:opacity-30">
+                                        <i class="fa-solid fa-chevron-left"></i>
+                                    </button>
+                                    <span id="ch-page-indicator" class="text-xs text-muted font-bold px-2">1 / 1</span>
+                                    <button id="ch-page-next" class="w-7 h-7 rounded-lg bg-surface border border-gray-800 flex items-center justify-center text-muted hover:text-white hover:bg-gray-800 transition-all text-xs disabled:opacity-30">
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <button class="flex items-center gap-1.5 bg-surface hover:bg-gray-800 border border-gray-800 text-muted hover:text-white px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all duration-300">
+                                    <i class="fa-solid fa-check-double text-[10px]"></i> Mark all as read
+                                </button>
+                                <button class="flex items-center gap-1.5 bg-surface hover:bg-gray-800 border border-gray-800 text-muted hover:text-white px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all duration-300">
+                                    <i class="fa-solid fa-list text-[10px]"></i> Index
+                                </button>
+                            </div>
+                        </div>
+                        <div id="chapters-list-container" class="flex flex-col gap-3">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                    <!-- COMMENTS TAB -->
+                    <div id="tab-comments" class="detail-tab-panel hidden">
+                        <div class="flex flex-col items-center justify-center py-20 gap-4 text-center">
+                            <i class="fa-regular fa-comment-dots text-5xl text-muted/20"></i>
+                            <p class="text-muted font-bold text-sm">No comments yet.</p>
+                            <p class="text-muted/60 text-xs">Be the first to share your thoughts.</p>
+                        </div>
+                    </div>
+                    <!-- ART TAB -->
+                    <div id="tab-art" class="detail-tab-panel hidden">
+                        <div class="flex flex-col items-center justify-center py-20 gap-4 text-center">
+                            <i class="fa-solid fa-palette text-5xl text-muted/20"></i>
+                            <p class="text-muted font-bold text-sm">No art submissions yet.</p>
+                        </div>
+                    </div>
+                    <!-- RELATED TAB -->
+                    <div id="tab-related" class="detail-tab-panel hidden">
+                        <div class="flex flex-col items-center justify-center py-20 gap-4 text-center">
+                            <i class="fa-solid fa-link text-5xl text-muted/20"></i>
+                            <p class="text-muted font-bold text-sm">No related titles found.</p>
+                        </div>
+                    </div>
+                    <!-- RECOMMENDATIONS TAB -->
+                    <div id="tab-recommendations" class="detail-tab-panel hidden">
+                        <div id="recommendations-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <aside class="hidden lg:flex flex-col gap-5 w-64 flex-shrink-0">
+                    <div class="bg-card rounded-2xl border border-gray-800/60 p-4 space-y-4">
+                        <div>
+                            <p class="text-[10px] text-muted font-black uppercase tracking-widest mb-2">Author</p>
+                            <span id="detail-author" class="text-white inline-block bg-surface px-3 py-1 rounded-full border border-gray-800 text-xs font-bold">Unknown</span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-muted font-black uppercase tracking-widest mb-2">Artist</p>
+                            <span id="detail-artist" class="text-white inline-block bg-surface px-3 py-1 rounded-full border border-gray-800 text-xs font-bold">Unknown</span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-muted font-black uppercase tracking-widest mb-2">Genres</p>
+                            <div id="detail-sidebar-genres" class="flex flex-wrap gap-1.5"></div>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-muted font-black uppercase tracking-widest mb-2">Demographic</p>
+                            <span id="detail-sidebar-demographic" class="text-white text-xs font-bold inline-block bg-surface px-3 py-1 rounded-full border border-gray-800">Shounen</span>
+                        </div>
+                    </div>
+                    <div class="bg-card rounded-2xl border border-gray-800/60 p-4">
+                        <p class="text-[10px] text-muted font-black uppercase tracking-widest mb-3">Track</p>
+                        <div class="flex flex-col gap-2">
+                            <a href="#" class="flex items-center gap-2 text-muted hover:text-accent text-xs font-semibold transition-colors"><span class="w-5 h-5 rounded bg-orange-500/20 flex items-center justify-center text-orange-400 text-[9px] font-black">M</span>MangaUpdates</a>
+                            <a href="#" class="flex items-center gap-2 text-muted hover:text-accent text-xs font-semibold transition-colors"><span class="w-5 h-5 rounded bg-blue-500/20 flex items-center justify-center text-blue-400 text-[9px] font-black">A</span>Anime-Planet</a>
+                            <a href="#" class="flex items-center gap-2 text-muted hover:text-accent text-xs font-semibold transition-colors"><span class="w-5 h-5 rounded bg-purple-500/20 flex items-center justify-center text-purple-400 text-[9px] font-black">A</span>AniList</a>
+                            <a href="#" class="flex items-center gap-2 text-muted hover:text-accent text-xs font-semibold transition-colors"><span class="w-5 h-5 rounded bg-yellow-500/20 flex items-center justify-center text-yellow-400 text-[9px] font-black">K</span>Kitsu</a>
+                            <a href="#" class="flex items-center gap-2 text-muted hover:text-accent text-xs font-semibold transition-colors"><span class="w-5 h-5 rounded bg-accent/20 flex items-center justify-center text-accent text-[9px] font-black">M</span>MyAnimeList</a>
+                        </div>
+                    </div>
+                    <div class="bg-card rounded-2xl border border-gray-800/60 p-4">
+                        <p class="text-[10px] text-muted font-black uppercase tracking-widest mb-3">Alternative Titles</p>
+                        <div id="detail-alt-titles-list" class="flex flex-col gap-2 text-xs text-muted font-medium"></div>
+                    </div>
+                    <div class="bg-card rounded-2xl border border-gray-800/60 p-4">
+                        <p class="text-[10px] text-muted font-black uppercase tracking-widest mb-2">Final Chapter</p>
+                        <p id="detail-final-chapter" class="text-white text-xs font-bold">—</p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- Manga Reader Modal -->
+    <div id="manga-reader-modal"
+        class="fixed inset-0 z-50 bg-darker opacity-0 invisible transition-all duration-300 flex flex-col">
+        <!-- Top Toolbar -->
+        <header class="bg-card border-b border-gray-800 px-4 py-3 flex items-center justify-between shadow-lg">
+            <div class="flex items-center gap-3">
+                <button id="btn-reader-back"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <div>
+                    <h4 id="reader-manga-title"
+                        class="font-black text-sm text-white uppercase tracking-wider truncate max-w-[150px] sm:max-w-[300px]">
+                    </h4>
+                    <span id="reader-chapter-title" class="text-xs text-muted font-bold"></span>
+                </div>
+            </div>
+ 
+            <!-- Controls -->
+            <div class="flex items-center gap-2">
+                <!-- Mode Toggle (Scroll vs Page) -->
+                <button id="btn-reader-mode"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300"
+                    title="Switch Reading Mode">
+                    <i class="fa-solid fa-scroll"></i>
+                </button>
+                <!-- Settings Button -->
+                <button id="btn-reader-settings"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300"
+                    title="Reader Settings">
+                    <i class="fa-solid fa-sliders"></i>
+                </button>
+                <div class="h-6 w-px bg-gray-800 mx-1"></div>
+                <!-- Prev / Next Chapter Buttons -->
+                <button id="btn-reader-prev-ch"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none"
+                    title="Previous Chapter">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button id="btn-reader-next-ch"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none"
+                    title="Next Chapter">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="h-6 w-px bg-gray-800 mx-1"></div>
+                <!-- Close Reader (Go directly back to homepage) -->
+                <button id="btn-reader-close"
+                    class="w-10 h-10 rounded-full bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-muted transition-all duration-300"
+                    title="Close Reader">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </header>
+ 
+        <!-- Settings Panel -->
+        <div id="reader-settings-panel"
+            class="absolute top-16 right-4 z-50 bg-card/95 backdrop-blur-xl border border-gray-800 rounded-3xl p-5 w-72 shadow-2xl transition-all duration-300 transform scale-95 opacity-0 invisible flex flex-col gap-4">
+            <h5 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-accent"></i> Reader Settings
+            </h5>
+ 
+            <!-- Theme Selection -->
+            <div>
+                <label class="text-[10px] text-muted font-black tracking-wider uppercase block mb-2">Background
+                    Color</label>
+                <div class="grid grid-cols-4 gap-2">
+                    <button data-theme="dark"
+                        class="h-8 rounded-lg bg-black border border-gray-800 hover:scale-105 active:scale-95 transition-all text-[10px] font-black text-white"
+                        title="Pitch Dark">Dark</button>
+                    <button data-theme="charcoal"
+                        class="h-8 rounded-lg bg-[#1a1a1a] border border-gray-800 hover:scale-105 active:scale-95 transition-all text-[10px] font-black text-white"
+                        title="Charcoal">Gray</button>
+                    <button data-theme="sepia"
+                        class="h-8 rounded-lg bg-[#f4ecd8] border border-amber-900/20 hover:scale-105 active:scale-95 transition-all text-[10px] font-black text-amber-950"
+                        title="Sepia">Sepia</button>
+                    <button data-theme="light"
+                        class="h-8 rounded-lg bg-white border border-gray-300 hover:scale-105 active:scale-95 transition-all text-[10px] font-black text-black"
+                        title="Light">Light</button>
+                </div>
+            </div>
+ 
+            <!-- Page Width Selection -->
+            <div>
+                <label class="text-[10px] text-muted font-black tracking-wider uppercase block mb-2">Max Page
+                    Width</label>
+                <div class="grid grid-cols-3 gap-2">
+                    <button data-width="600"
+                        class="py-1.5 rounded-lg bg-surface hover:bg-accent hover:text-white border border-gray-800 text-[10px] font-bold text-white transition-all duration-300">Narrow</button>
+                    <button data-width="750"
+                        class="py-1.5 rounded-lg bg-accent text-white border border-transparent text-[10px] font-bold transition-all duration-300">Default</button>
+                    <button data-width="950"
+                        class="py-1.5 rounded-lg bg-surface hover:bg-accent hover:text-white border border-gray-800 text-[10px] font-bold text-white transition-all duration-300">Wide</button>
+                </div>
+            </div>
+ 
+            <!-- Page Scale / Zoom Selection -->
+            <div>
+                <label class="text-[10px] text-muted font-black tracking-wider uppercase block mb-2">Page Zoom</label>
+                <div class="flex items-center gap-3">
+                    <button id="btn-zoom-out"
+                        class="w-8 h-8 rounded-lg bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-xs font-bold text-white border border-gray-800 transition-all duration-300">-</button>
+                    <span id="zoom-indicator" class="flex-grow text-center text-xs font-bold text-white">100%</span>
+                    <button id="btn-zoom-in"
+                        class="w-8 h-8 rounded-lg bg-surface hover:bg-accent hover:text-white flex items-center justify-center text-xs font-bold text-white border border-gray-800 transition-all duration-300">+</button>
+                </div>
+            </div>
+        </div>
+ 
+        <!-- Reader Canvas (Scrollable Pages) -->
+        <div id="reader-canvas"
+            class="flex-grow overflow-y-auto p-4 md:p-8 flex flex-col items-center gap-6 no-scrollbar bg-dark select-none">
+            <!-- Reader content injected by JS -->
+        </div>
+ 
+        <!-- Bottom Toolbar (For Page Navigation in Slide Mode) -->
+        <footer id="reader-footer"
+            class="bg-card border-t border-gray-800 px-4 py-3 flex items-center justify-between shadow-lg">
+            <button id="btn-reader-prev-page"
+                class="px-4 py-2 rounded-full bg-surface hover:bg-accent hover:text-white text-xs font-black tracking-wider text-muted transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none">PREV
+                PAGE</button>
+            <span id="reader-page-indicator" class="text-xs text-muted font-black tracking-wider">PAGE 1 / 10</span>
+            <button id="btn-reader-next-page"
+                class="px-4 py-2 rounded-full bg-surface hover:bg-accent hover:text-white text-xs font-black tracking-wider text-muted transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none">NEXT
+                PAGE</button>
+        </footer>
+    </div>
+
+     <!-- SCRIPTS -->
+
+<script src="./manga-data/manga-data.js"></script>
+<script src="./assets/js/home-page.js"></script>
+<script src="./assets/js/i18n.js"></script>
+
+<!-- 3. Build cards from manga-data.js (New Releases = isNew === true) -->
+<script>
+(function () {
+  'use strict';
+
+  const grid = document.getElementById('cardGrid');
+  if (!grid) return;
+
+  // Pull all manga, keep only the ones flagged as new
+  const allManga = window.MangaData?.gridData || [];
+  const newReleases = allManga.filter(m => m.isNew === true);
+
+  function translateGenre(genreName) {
+    if (!genreName) return "";
+    const key = "genre." + genreName.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const translated = window.RH_i18n ? window.RH_i18n.t(key) : genreName;
+    return translated === key ? genreName : translated;
+  }
+
+  function buildCardHTML(manga, index) {
+    const status   = (manga.status || 'ongoing').toLowerCase();
+    const demo     = (manga.demo || 'shounen').toLowerCase();
+    const genres   = (manga.genres || []).map(g => g.toLowerCase()).join(',');
+    const genreText = (manga.genres || []).map(g => translateGenre(g)).join(' · ');
+    
+    // Status translation / formatting
+    let statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
+    if (window.RH_i18n) {
+      if (status === 'ongoing') statusLabel = window.RH_i18n.t('filter.ongoing');
+      else if (status === 'completed') statusLabel = window.RH_i18n.t('filter.completed');
+      else if (status === 'hiatus') statusLabel = window.RH_i18n.t('filter.hiatus');
+      else if (status === 'cancelled') statusLabel = window.RH_i18n.t('filter.cancelled');
+    }
+
+    let demoLabel = demo.charAt(0).toUpperCase() + demo.slice(1);
+    if (window.RH_i18n) {
+      if (demo === 'shounen') demoLabel = window.RH_i18n.t('filter.shounen') || 'Shounen';
+      else if (demo === 'shoujo') demoLabel = window.RH_i18n.t('filter.shoujo') || 'Shoujo';
+      else if (demo === 'seinen') demoLabel = window.RH_i18n.t('filter.seinen') || 'Seinen';
+      else if (demo === 'josei') demoLabel = window.RH_i18n.t('filter.josei') || 'Josei';
+    }
+
+    const typeLabel = manga.type || 'Manga';
+
+    return `
+      <div class="card animate-fade-in-up" style="animation-delay:${(index * 0.04).toFixed(2)}s"
+        data-title="${manga.title}" data-demo="${demo}" data-status="${status}" data-genres="${genres}">
+        <div class="card-thumb">
+          <div class="badge ${status}">${statusLabel}</div>
+          <div class="thumb-art"><img src="${manga.img}" alt="${manga.title}"></div>
+          <div class="card-overlay"><span><i class="fa-solid fa-book-open mr-1"></i>Read Now</span></div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">${manga.title}</div>
+          <div class="card-meta">${demoLabel} · ${typeLabel} · ${genreText}</div>
+        </div>
+      </div>`;
+  }
+
+  grid.innerHTML = newReleases.map((m, i) => buildCardHTML(m, i)).join('');
+
+  // ── Click a card → open the same detail modal as index.html ──
+  grid.addEventListener('click', (e) => {
+    const card = e.target.closest('.card');
+    if (!card) return;
+
+    const titleText = card.dataset.title;
+    const manga = newReleases.find(
+      m => m.title.toLowerCase() === titleText.toLowerCase()
+    );
+
+    if (manga && window.__openDetail) {
+      window.__openDetail(manga);
+    }
+  });
+})();
+</script>
+
+<!-- Page-specific filter / search logic -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── helpers ── */
+  const $ = id => document.getElementById(id);
+  const cards = () => [...document.querySelectorAll('#cardGrid .card')];
+
+  /* ── tag toggle (demographic / status) ── */
+  window.toggleTag = function(btn) {
+    btn.classList.toggle('active');
+    applyFilters();
+  };
+
+  /* ── genre 3-state cycle: neutral → included → excluded → neutral ── */
+  window.cycleGenre = function(btn) {
+    if (!btn.classList.contains('included') && !btn.classList.contains('excluded')) {
+      btn.classList.add('included');
+    } else if (btn.classList.contains('included')) {
+      btn.classList.remove('included');
+      btn.classList.add('excluded');
+    } else {
+      btn.classList.remove('excluded');
+    }
+    applyFilters();
+  };
+
+  /* ── live search & button ── */
+  window.doSearch = function() { applyFilters(); };
+  $('searchInput').addEventListener('input', () => { applyFilters(); });
+  $('searchInput').addEventListener('keydown', e => { if (e.key === 'Enter') applyFilters(); });
+
+  /* ── core filter + sort ── */
+  window.applyFilters = function() {
+    const query    = $('searchInput').value.trim().toLowerCase();
+    const sortVal  = $('sortSelect').value;
+
+    // active demographics
+    const activeDemo = [...document.querySelectorAll('#demographic .tag.active')]
+                         .map(b => b.getAttribute('data-i18n').replace('filter.', '').trim().toLowerCase());
+    // active statuses
+    const activeStat = [...document.querySelectorAll('#status .tag.active')]
+                         .map(b => b.getAttribute('data-i18n').replace('filter.', '').trim().toLowerCase());
+    // included / excluded genres
+    const included = [...document.querySelectorAll('#genres .genre-btn.included')]
+                       .map(b => b.getAttribute('data-i18n').replace('genre.', '').trim().toLowerCase());
+    const excluded = [...document.querySelectorAll('#genres .genre-btn.excluded')]
+                       .map(b => b.getAttribute('data-i18n').replace('genre.', '').trim().toLowerCase());
+
+    let visible = [];
+
+    cards().forEach(card => {
+      const title  = (card.dataset.title  || '').toLowerCase();
+      const demo   = (card.dataset.demo   || '').toLowerCase();
+      const status = (card.dataset.status || '').toLowerCase();
+      const genres = (card.dataset.genres || '').toLowerCase().split(',').map(g => g.trim().replace(/[^a-z0-9]/g, ""));
+
+      let show = true;
+
+      // title search
+      if (query && !title.includes(query)) show = false;
+
+      // demographic filter
+      if (show && activeDemo.length && !activeDemo.includes(demo)) show = false;
+
+      // status filter
+      if (show && activeStat.length && !activeStat.includes(status)) show = false;
+
+      // included genres: card must have ALL included genres
+      if (show && included.length) {
+        if (!included.every(g => genres.includes(g))) show = false;
+      }
+
+      // excluded genres: card must have NONE of the excluded genres
+      if (show && excluded.length) {
+        if (excluded.some(g => genres.includes(g))) show = false;
+      }
+
+      card.style.display = show ? '' : 'none';
+      if (show) visible.push(card);
+    });
+
+    // sort visible cards
+    const grid = $('cardGrid');
+    if (sortVal === 'az') {
+      visible.sort((a, b) => a.dataset.title.localeCompare(b.dataset.title));
+    } else if (sortVal === 'za') {
+      visible.sort((a, b) => b.dataset.title.localeCompare(a.dataset.title));
+    } else if (sortVal === 'ongoing') {
+      visible.sort((a, b) => (a.dataset.status === 'ongoing' ? -1 : 1));
+    } else if (sortVal === 'completed') {
+      visible.sort((a, b) => (a.dataset.status === 'completed' ? -1 : 1));
+    }
+    // re-append in sorted order (hidden cards stay at end, already display:none)
+    visible.forEach(c => grid.appendChild(c));
+
+    // update count
+    $('countLabel').textContent = visible.length;
+
+    // empty state
+    const empty = $('emptyState');
+    empty.classList.toggle('visible', visible.length === 0);
+  };
+
+  /* ── reset ── */
+  window.resetFilters = function() {
+    $('searchInput').value = '';
+    $('sortSelect').selectedIndex = 0;
+    document.querySelectorAll('.tag.active').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.genre-btn').forEach(b => b.classList.remove('included','excluded'));
+    applyFilters();
+  };
+
+  /* ── run on load ── */
+  setTimeout(applyFilters, 100);
+})();
+</script>
+</body>
+</html>

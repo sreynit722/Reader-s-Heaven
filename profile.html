@@ -1,0 +1,1875 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reader's Haven | My Profile</title>
+
+    <!-- Pre-load Theme to prevent Flicker -->
+    <script>
+      (function () {
+        const theme = localStorage.getItem("theme");
+        if (theme === "light")
+          document.documentElement.classList.add("light-mode");
+      })();
+    </script>
+
+    <meta
+      name="description"
+      content="Reader's Haven — Manage your profile, reading history, and preferences."
+    />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome 6 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              dark: "#121212",
+              card: "#202020",
+              accent: "#D6336C",
+              muted: "#A0A0A0",
+              darker: "#181818",
+              surface: "#2A2A2A",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* ─── Scrollbar ─── */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #121212;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2a2a2a;
+        border-radius: 99px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #d6336c;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* ─── Fade-up animation ─── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fade-up {
+        animation: fadeUp 0.45s ease both;
+      }
+
+      /* ─── Profile banner ─── */
+      .profile-banner {
+        height: 100px;
+        background: linear-gradient(
+          135deg,
+          #1a0a10 0%,
+          #2d0f1e 40%,
+          #d6336c22 80%,
+          #1a0a10 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+      .profile-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          radial-gradient(
+            circle at 20% 50%,
+            rgba(214, 51, 108, 0.18) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(214, 51, 108, 0.1) 0%,
+            transparent 40%
+          );
+      }
+      .profile-banner::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D6336C' fill-opacity='0.06'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+      }
+
+      /* ─── Avatar ring ─── */
+      .avatar-ring {
+        box-shadow:
+          0 0 0 3px #d6336c,
+          0 0 0 6px rgba(214, 51, 108, 0.15);
+      }
+
+      /* ─── Stat card ─── */
+      .stat-card {
+        background: #202020;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .stat-card:hover {
+        border-color: rgba(214, 51, 108, 0.3);
+        transform: translateY(-2px);
+      }
+
+      /* ─── Nav items (sidebar menu) ─── */
+      .nav-item {
+        color: #a0a0a0;
+        border-left: 3px solid transparent;
+        transition: all 0.2s;
+      }
+      .nav-item:hover {
+        color: #ffffff;
+        background: rgba(214, 51, 108, 0.05);
+      }
+      .nav-item.active {
+        color: #d6336c;
+        border-left-color: #d6336c;
+        background: rgba(214, 51, 108, 0.07);
+      }
+
+      /* ─── Tab panels ─── */
+      .panel {
+        display: none;
+      }
+      .panel.active {
+        display: block;
+      }
+
+      /* ─── Form inputs ─── */
+      .f-input {
+        width: 100%;
+        background: #2a2a2a;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 0.875rem;
+        color: #ffffff;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        font-family: "Inter", sans-serif;
+      }
+      .f-input:focus {
+        border-color: #d6336c;
+        box-shadow: 0 0 0 3px rgba(214, 51, 108, 0.12);
+      }
+      .f-input:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* ─── Toggle ─── */
+      .toggle {
+        width: 44px;
+        height: 24px;
+        border-radius: 99px;
+        position: relative;
+        cursor: pointer;
+        transition: background 0.3s;
+        flex-shrink: 0;
+      }
+      .toggle.on {
+        background: #d6336c;
+      }
+      .toggle.off {
+        background: #2a2a2a;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .toggle-dot {
+        position: absolute;
+        top: 3px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        transition: left 0.3s;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+      }
+      .toggle.on .toggle-dot {
+        left: 23px;
+      }
+      .toggle.off .toggle-dot {
+        left: 3px;
+      }
+
+      /* ─── History card ─── */
+      .h-card {
+        transition:
+          border-color 0.2s,
+          transform 0.15s;
+      }
+      .h-card:hover {
+        transform: translateX(3px);
+      }
+
+      /* ─── Toast ─── */
+      #toast {
+        position: fixed;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%) translateY(80px);
+        background: #202020;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: #fff;
+        padding: 10px 22px;
+        border-radius: 99px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        z-index: 9999;
+        transition:
+          transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+          opacity 0.3s;
+        opacity: 0;
+        pointer-events: none;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      #toast.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+      #toast.error {
+        border-color: rgba(239, 68, 68, 0.4);
+      }
+      #toast .toast-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #d6336c;
+        flex-shrink: 0;
+      }
+      #toast.error .toast-dot {
+        background: #ef4444;
+      }
+
+      /* ─── Sidebar drawer (managed by home-page.js via inline style) ─── */
+
+      /* ─── Favorite genre chips ─── */
+      .genre-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        border-radius: 99px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        background: rgba(214, 51, 108, 0.1);
+        color: #d6336c;
+        border: 1px solid rgba(214, 51, 108, 0.2);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .genre-chip:hover {
+        background: rgba(214, 51, 108, 0.2);
+        transform: scale(1.04);
+      }
+      .genre-chip.selected {
+        background: #d6336c;
+        color: #fff;
+        border-color: #d6336c;
+      }
+
+      /* ─── Achievement badge ─── */
+      .badge {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 14px 10px;
+        border-radius: 16px;
+        background: #2a2a2a;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .badge:hover {
+        border-color: rgba(214, 51, 108, 0.3);
+        transform: translateY(-2px);
+      }
+      .badge-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+      }
+
+      /* ─── Reading progress bar ─── */
+      .progress-bar-bg {
+        background: #2a2a2a;
+        border-radius: 99px;
+        height: 5px;
+        overflow: hidden;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #d6336c, #ff6b9d);
+        border-radius: 99px;
+        transition: width 0.8s ease;
+      }
+
+      /* ─── Body background ─── */
+      html,
+      body {
+        min-height: 100%;
+      }
+      body {
+        background-image: url("./assets/imagine/website/bg.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-color: #121212;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+        z-index: 0;
+      }
+      body > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ─── Glassy / blurry cards ─── */
+      .glass-card {
+        background: rgba(32, 32, 32, 0.55);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+    </style>
+  </head>
+
+  <body
+    class="text-white font-sans antialiased overflow-x-hidden min-h-screen flex flex-col"
+  >
+    <!-- 1. STICKY HEADER -->
+    <header
+      id="main-header"
+      class="sticky top-0 z-40 bg-darker/95 backdrop-blur-md border-b border-gray-800/60 shadow-lg py-3 px-4 md:px-8 flex justify-between items-center transition-all duration-300"
+    >
+      <!-- Left: Logo -->
+      <a
+        href="index.html"
+        class="flex items-center gap-3 cursor-pointer group"
+        id="logo-link"
+      >
+        <span
+          class="font-black text-2xl tracking-wider hidden sm:block text-accent"
+          >Reader's Haven</span
+        >
+      </a>
+
+      <!-- Center Navigation -->
+      <nav class="hidden lg:flex items-center gap-3 relative">
+        <div class="relative">
+          <button
+            id="btn-browse"
+            class="flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md"
+          >
+            <span data-i18n="nav.browse">BROWSE CATALOG</span>
+          </button>
+          <!-- Browse Dropdown -->
+          <div
+            id="dropdown-browse"
+            class="absolute top-full left-0 mt-2 w-48 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 py-2"
+          >
+            <a
+              href="manhwa.html"
+              class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all"
+              data-i18n="nav.manhwa"
+              >Manhwa</a
+            >
+            <a
+              href="manga.html"
+              class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all"
+              data-i18n="nav.manga"
+              >Manga</a
+            >
+            <a
+              href="novel.html"
+              class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all"
+              data-i18n="nav.novel"
+              >Novel</a
+            >
+          </div>
+        </div>
+
+        <div class="relative">
+          <button
+            id="btn-history"
+            class="flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md"
+          >
+            <span data-i18n="nav.history">MY HISTORY</span>
+          </button>
+          <!-- History Dropdown -->
+          <div
+            id="dropdown-history"
+            class="absolute top-full left-0 mt-2 w-72 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 overflow-hidden"
+          >
+            <!-- Populated dynamically by home-page.js -->
+          </div>
+        </div>
+
+        <div class="relative">
+          <button
+            id="btn-genres"
+            class="flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md"
+          >
+            <span data-i18n="nav.genres">GENRE FILTERS</span>
+          </button>
+          <!-- Genre Dropdown -->
+          <div
+            id="dropdown-genres"
+            class="absolute top-full left-0 mt-2 w-52 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 py-2"
+          >
+            <a
+              href="new_release.html?action"
+              class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all"
+              data-i18n="genre.action"
+              >Action</a
+            >
+            <a
+              href="new_release.html?romance"
+              class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all"
+              data-i18n="genre.romance"
+              >Romance</a
+            >
+            <a
+              href="new_release.html?fantasy"
+              class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all"
+              data-i18n="genre.fantasy"
+              >Fantasy</a
+            >
+            <a
+              href="new_release.html?horror"
+              class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all"
+              data-i18n="genre.horror"
+              >Horror</a
+            >
+            <a
+              href="new_release.html?scifi"
+              class="block px-5 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all"
+              data-i18n="genre.scifi"
+              >Sci-Fi</a
+            >
+          </div>
+        </div>
+
+        <a
+          href="new_release.html"
+          class="inline-flex items-center gap-2 bg-card hover:bg-gray-800 text-muted hover:text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-md"
+        >
+          <span data-i18n="nav.newReleases">NEW RELEASES</span>
+        </a>
+      </nav>
+
+      <!-- Right: Actions -->
+      <div class="flex items-center gap-3 sm:gap-5">
+        <!-- Search Bar -->
+        <div
+          class="hidden md:flex items-center bg-card rounded-full px-4 py-2 gap-2 border border-transparent focus-within:border-accent focus-within:shadow-[0_0_12px_rgba(214,51,108,0.2)] transition-all duration-300 relative"
+        >
+          <i class="fa-solid fa-magnifying-glass text-muted text-sm"></i>
+          <input
+            type="text"
+            placeholder="Search manga..."
+            data-i18n-placeholder="nav.searchPlaceholder"
+            class="bg-transparent border-none outline-none text-sm w-36 lg:w-48 text-white placeholder-muted"
+            id="search-input"
+          />
+          <!-- Search Results Dropdown -->
+          <div
+            id="search-results-dropdown"
+            class="hidden absolute top-full left-0 mt-2 w-80 bg-card/95 backdrop-blur-xl border border-gray-700/50 rounded-2xl shadow-2xl z-50 overflow-hidden max-h-[400px] overflow-y-auto no-scrollbar"
+          ></div>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="relative">
+          <button
+            id="btn-lang"
+            class="flex items-center gap-1.5 bg-card hover:bg-gray-800 text-muted hover:text-white px-3 py-2 rounded-full text-xs font-bold transition-all duration-300"
+          >
+            <i class="fa-solid fa-globe text-[11px]"></i>
+            <span id="lang-current">EN</span>
+          </button>
+          <div
+            id="dropdown-lang"
+            class="absolute top-full right-0 mt-2 w-36 bg-card border border-gray-700/50 rounded-2xl shadow-2xl opacity-0 invisible transition-all duration-300 transform translate-y-2 z-50 py-2 overflow-hidden"
+          >
+            <button
+              data-lang="en"
+              class="lang-option w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all text-left"
+            >
+              🇬🇧 <span>English</span>
+            </button>
+            <button
+              data-lang="km"
+              class="lang-option w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-muted hover:text-accent hover:bg-accent/5 transition-all text-left"
+            >
+              🇰🇭 <span>ខ្មែរ</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- User Avatar -->
+        <div
+          id="header-avatar"
+          class="w-9 h-9 rounded-full bg-surface flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-accent transition-all duration-300 overflow-hidden"
+        >
+          <a
+            href="profile.html"
+            class="w-full h-full flex items-center justify-center"
+          >
+            <i
+              class="fa-solid fa-user text-sm text-muted"
+              id="header-avatar-icon"
+            ></i>
+          </a>
+        </div>
+
+        <!-- Auth Links -->
+        <div
+          id="header-auth-container"
+          class="hidden sm:flex items-center gap-2.5 border-l border-gray-800/60 pl-4 ml-1"
+        >
+          <a
+            href="login.html"
+            class="text-[11px] font-black text-muted hover:text-accent transition-colors duration-300 tracking-tighter"
+            data-i18n="nav.login"
+            >LOG IN</a
+          >
+          <div class="h-3 w-[1px] bg-gray-800/80"></div>
+          <a
+            href="signup.html"
+            class="text-[11px] font-black text-muted hover:text-accent transition-colors duration-300 tracking-tighter"
+            data-i18n="nav.signup"
+            >SIGN UP</a
+          >
+        </div>
+
+        <!-- Notification -->
+        <div class="relative cursor-pointer group">
+          <i
+            class="fa-regular fa-bell text-xl text-muted group-hover:text-accent transition-colors duration-300"
+          ></i>
+          <span
+            class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-darker animate-pulse"
+          ></span>
+        </div>
+
+        <!-- Hamburger -->
+        <button
+          id="btn-hamburger"
+          class="text-xl text-muted hover:text-accent cursor-pointer transition-colors duration-300 ml-1"
+          aria-label="Open menu"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- SIDEBAR DRAWER -->
+    <div
+      id="sidebar-overlay"
+      class="fixed inset-0 bg-black/60 z-50 opacity-0 invisible transition-all duration-300 backdrop-blur-sm"
+    ></div>
+    <aside
+      id="sidebar-drawer"
+      class="fixed top-0 right-[-350px] w-[300px] h-full bg-card shadow-[-10px_0_40px_rgba(0,0,0,0.6)] z-[60] flex flex-col transition-all duration-500 ease-out"
+    >
+      <div
+        class="flex justify-between items-center p-6 border-b border-gray-800/50"
+      >
+        <div class="flex items-center gap-3">
+          <span class="font-bold text-xl tracking-wide">Reader's Haven</span>
+        </div>
+        <button
+          id="btn-close-sidebar"
+          class="text-2xl text-muted hover:text-accent transition-colors duration-300"
+          aria-label="Close menu"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div
+        class="p-5 flex flex-col gap-1 flex-grow no-scrollbar overflow-y-auto"
+      >
+        <a
+          href="index.html"
+          class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+        >
+          <i class="fa-solid fa-house w-5 text-center text-muted"></i>
+          <span data-i18n="sidebar.home">Home</span>
+        </a>
+        <a
+          href="new_release.html"
+          class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+        >
+          <i class="fa-solid fa-compass w-5 text-center text-muted"></i>
+          <span data-i18n="sidebar.explore">Explore</span>
+        </a>
+        <a
+          href="library.html"
+          class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+        >
+          <i class="fa-solid fa-bookmark w-5 text-center text-muted"></i>
+          <span data-i18n="sidebar.library">My Library</span>
+        </a>
+        <a
+          href="profile.html"
+          class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+        >
+          <i class="fa-solid fa-user-gear w-5 text-center text-muted"></i>
+          <span data-i18n="sidebar.profile">Profile Settings</span>
+        </a>
+        <a
+          href="#"
+          id="btn-theme-toggle"
+          class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+        >
+          <i
+            class="fa-solid fa-moon w-5 text-center text-muted"
+            id="theme-icon"
+          ></i>
+          <span id="theme-text" data-i18n="sidebar.theme"
+            >Dark / Light Theme</span
+          >
+        </a>
+        <a
+          href="contact.html"
+          class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+        >
+          <i class="fa-solid fa-envelope w-5 text-center text-muted"></i>
+          <span data-i18n="sidebar.contact">Contact Us</span>
+        </a>
+        <a
+          href="aboutus.html"
+          class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+        >
+          <i class="fa-solid fa-circle-info w-5 text-center text-muted"></i>
+          <span data-i18n="sidebar.about">About Us</span>
+        </a>
+        <a
+          href="community.html"
+          class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+        >
+          <i class="fa-solid fa-users w-5 text-center text-muted"></i>
+          <span data-i18n="sidebar.community">Community</span>
+        </a>
+        <div class="h-px bg-gray-800/50 my-3"></div>
+
+        <!-- Browse Catalog -->
+        <p
+          class="text-[10px] font-black text-accent uppercase tracking-widest px-3.5 pt-2 pb-1"
+          data-i18n="sidebar.browseCatalog"
+        >
+          Browse Catalog
+        </p>
+        <a
+          href="manhwa.html"
+          class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+        >
+          <i
+            class="fa-solid fa-circle w-5 text-center text-muted text-[8px]"
+          ></i>
+          <span data-i18n="nav.manhwa">Manhwa (Korean)</span>
+        </a>
+        <a
+          href="manga.html"
+          class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+        >
+          <i
+            class="fa-solid fa-circle w-5 text-center text-muted text-[8px]"
+          ></i>
+          <span data-i18n="nav.manga">Manga (Japanese)</span>
+        </a>
+        <a
+          href="novel.html"
+          class="sidebar-link flex items-center gap-4 text-white font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+        >
+          <i
+            class="fa-solid fa-circle w-5 text-center text-muted text-[8px]"
+          ></i>
+          <span data-i18n="nav.novel">Novels</span>
+        </a>
+
+        <div class="h-px bg-gray-800/50 my-3"></div>
+
+        <!-- Genres -->
+        <p
+          class="text-[10px] font-black text-accent uppercase tracking-widest px-3.5 pt-2 pb-1"
+          data-i18n="sidebar.genres"
+        >
+          Genres
+        </p>
+        <div class="grid grid-cols-2 gap-1 px-1">
+          <a
+            href="new_release.html"
+            class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200"
+          >
+            <span class="text-accent text-xs">#</span>
+            <span data-i18n="genre.action">Action</span>
+          </a>
+          <a
+            href="new_release.html"
+            class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200"
+          >
+            <span class="text-accent text-xs">#</span>
+            <span data-i18n="genre.romance">Romance</span>
+          </a>
+          <a
+            href="new_release.html"
+            class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200"
+          >
+            <span class="text-accent text-xs">#</span>
+            <span data-i18n="genre.fantasy">Fantasy</span>
+          </a>
+          <a
+            href="new_release.html"
+            class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200"
+          >
+            <span class="text-accent text-xs">#</span>
+            <span data-i18n="genre.horror">Horror</span>
+          </a>
+          <a
+            href="new_release.html"
+            class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200"
+          >
+            <span class="text-accent text-xs">#</span>
+            <span data-i18n="genre.scifi">Sci-Fi</span>
+          </a>
+          <a
+            href="new_release.html"
+            class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200"
+          >
+            <span class="text-accent text-xs">#</span>
+            <span data-i18n="genre.comedy">Comedy</span>
+          </a>
+          <a
+            href="new_release.html"
+            class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200"
+          >
+            <span class="text-accent text-xs">#</span>
+            <span data-i18n="genre.drama">Drama</span>
+          </a>
+          <a
+            href="new_release.html"
+            class="flex items-center gap-2 text-muted hover:text-accent text-sm font-semibold p-2.5 rounded-xl hover:bg-accent/10 transition-all duration-200"
+          >
+            <span class="text-accent text-xs">#</span>
+            <span data-i18n="genre.sliceOfLife">Slice of Life</span>
+          </a>
+        </div>
+
+        <div class="h-px bg-gray-800/50 my-3"></div>
+
+        <a
+          href="login.html"
+          class="sidebar-link flex items-center gap-4 text-accent font-semibold p-3.5 rounded-xl hover:bg-accent/10 hover:text-accent transition-all duration-300 transform hover:translate-x-2"
+          id="sidebar-auth-btn"
+        >
+          <i
+            class="fa-solid fa-right-from-bracket w-5 text-center"
+            id="auth-icon"
+          ></i>
+          <span id="auth-text" data-i18n="sidebar.login">Login / Sign Up</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- main content -->
+    <main class="flex-grow w-full max-w-6xl mx-auto px-4 md:px-8 py-10">
+      <!-- Breadcrumb -->
+      <div class="text-xs text-muted mb-7 flex items-center gap-2 fade-up">
+        <a
+          href="index.html"
+          class="hover:text-accent transition-colors"
+          data-i18n="sidebar.home"
+          >Home</a
+        >
+        <i class="fa-solid fa-chevron-right text-[9px]"></i>
+        <span class="text-accent font-semibold" data-i18n="profile.myProfile"
+          >My Profile</span
+        >
+      </div>
+
+      <div class="flex flex-col lg:flex-row gap-6 items-start">
+        <!-- ══ LEFT SIDEBAR ══ -->
+        <aside class="w-full lg:w-64 flex-shrink-0 flex flex-col gap-4">
+          <!-- Profile Card -->
+          <div
+            class="glass-card border border-gray-800/60 rounded-2xl overflow-hidden fade-up"
+            style="animation-delay: 0.05s"
+          >
+            <!-- Banner -->
+            <div class="profile-banner"></div>
+
+            <!-- Avatar overlapping banner -->
+            <div class="px-6 pb-6 -mt-10 text-center">
+              <div class="relative inline-block mb-3">
+                <div
+                  class="w-20 h-20 rounded-full avatar-ring overflow-hidden bg-surface mx-auto flex items-center justify-center border-4 border-card"
+                >
+                  <img
+                    id="avatar-img"
+                    src=""
+                    alt=""
+                    class="w-full h-full object-cover hidden"
+                  />
+                  <span
+                    id="avatar-letter"
+                    class="font-black text-3xl text-accent"
+                    >?</span
+                  >
+                </div>
+                <label
+                  class="absolute bottom-0 right-0 w-7 h-7 bg-accent rounded-full flex items-center justify-center cursor-pointer hover:bg-pink-500 transition-colors shadow-lg"
+                  title="Change photo"
+                >
+                  <i class="fa-solid fa-camera text-[10px] text-white"></i>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="avatar-upload"
+                    class="hidden"
+                  />
+                </label>
+              </div>
+              <div class="font-black text-base leading-tight" id="sb-name">
+                —
+              </div>
+              <div class="text-muted text-xs mt-1 truncate px-2" id="sb-email">
+                —
+              </div>
+              <span
+                class="inline-block mt-3 px-3 py-1 bg-accent/10 text-accent text-[10px] font-black rounded-full tracking-wider border border-accent/20"
+                data-i18n="profile.premiumReader"
+              >
+                ✦ PREMIUM READER
+              </span>
+            </div>
+          </div>
+
+          <!-- Nav Menu -->
+          <div
+            class="glass-card border border-gray-800/60 rounded-2xl overflow-hidden fade-up"
+            style="animation-delay: 0.1s"
+          >
+            <button
+              onclick="switchTab('info')"
+              data-tab="info"
+              class="nav-item active w-full flex items-center gap-3 px-5 py-3.5 text-sm font-semibold text-left"
+            >
+              <i class="fa-regular fa-user w-4 text-center"></i>
+              <span data-i18n="profile.navInfo">Profile Info</span>
+            </button>
+            <button
+              onclick="switchTab('history')"
+              data-tab="history"
+              class="nav-item w-full flex items-center gap-3 px-5 py-3.5 text-sm font-semibold text-left"
+            >
+              <i class="fa-regular fa-clock-rotate-left w-4 text-center"></i>
+              <span data-i18n="profile.navHistory">Reading History</span>
+            </button>
+            <button
+              onclick="switchTab('settings')"
+              data-tab="settings"
+              class="nav-item w-full flex items-center gap-3 px-5 py-3.5 text-sm font-semibold text-left"
+            >
+              <i class="fa-solid fa-gear w-4 text-center"></i>
+              <span data-i18n="profile.navSettings">Settings</span>
+            </button>
+            <div class="h-px bg-gray-800/60 mx-4"></div>
+            <button
+              onclick="doLogout()"
+              class="w-full flex items-center gap-3 px-5 py-3.5 text-sm font-bold text-red-400 hover:bg-red-500/10 transition-all text-left"
+            >
+              <i class="fa-solid fa-right-from-bracket w-4 text-center"></i>
+              <span data-i18n="profile.logOut">Log Out</span>
+            </button>
+          </div>
+
+          <!-- Reading Goal (sidebar widget) -->
+          <div
+            class="glass-card border border-gray-800/60 rounded-2xl p-5 fade-up"
+            style="animation-delay: 0.15s"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <span
+                class="text-xs font-black text-muted uppercase tracking-widest"
+                data-i18n="profile.monthlyGoal"
+                >Monthly Goal</span
+              >
+              <span class="text-xs font-black text-accent" id="goal-pct"
+                >0%</span
+              >
+            </div>
+            <div class="progress-bar-bg mb-2">
+              <div
+                class="progress-bar-fill"
+                id="goal-bar"
+                style="width: 0%"
+              ></div>
+            </div>
+            <div class="text-[11px] text-muted text-right">
+              <span id="goal-done">0</span> / <span id="goal-total">10</span>
+              <span data-i18n="profile.titles">titles</span>
+            </div>
+          </div>
+        </aside>
+        <!-- end left sidebar -->
+
+        <!-- ══ RIGHT CONTENT ══ -->
+        <div class="flex-1 min-w-0 flex flex-col gap-5">
+          <!-- Stats Row -->
+          <div
+            class="grid grid-cols-2 sm:grid-cols-4 gap-4 fade-up"
+            style="animation-delay: 0.15s"
+          >
+            <div class="stat-card rounded-2xl p-4 text-center">
+              <div class="text-2xl font-black text-accent" id="stat-read">
+                0
+              </div>
+              <div
+                class="text-[10px] text-muted uppercase tracking-widest mt-1"
+                data-i18n="profile.titlesRead"
+              >
+                Titles Read
+              </div>
+            </div>
+            <div class="stat-card rounded-2xl p-4 text-center">
+              <div class="text-2xl font-black text-accent" id="stat-sessions">
+                0
+              </div>
+              <div
+                class="text-[10px] text-muted uppercase tracking-widest mt-1"
+                data-i18n="profile.sessions"
+              >
+                Sessions
+              </div>
+            </div>
+            <div class="stat-card rounded-2xl p-4 text-center">
+              <div class="text-2xl font-black text-accent" id="stat-streak">
+                0
+              </div>
+              <div
+                class="text-[10px] text-muted uppercase tracking-widest mt-1"
+                data-i18n="profile.dayStreak"
+              >
+                Day Streak 🔥
+              </div>
+            </div>
+            <div class="stat-card rounded-2xl p-4 text-center">
+              <div class="text-2xl font-black text-accent">2026</div>
+              <div
+                class="text-[10px] text-muted uppercase tracking-widest mt-1"
+                data-i18n="profile.memberSince"
+              >
+                Member Since
+              </div>
+            </div>
+          </div>
+
+          <!-- ── PANEL: PROFILE INFO ── -->
+          <div
+            id="panel-info"
+            class="panel active glass-card border border-gray-800/60 rounded-2xl p-6 md:p-8 fade-up"
+            style="animation-delay: 0.2s"
+          >
+            <div
+              class="flex items-center justify-between mb-6 pb-5 border-b border-gray-800/50"
+            >
+              <div class="flex items-center gap-3">
+                <div class="w-1 h-6 bg-accent rounded-full"></div>
+                <h2
+                  class="font-black text-base"
+                  data-i18n="profile.accountDetails"
+                >
+                  Account Details
+                </h2>
+              </div>
+              <button
+                id="btn-edit"
+                onclick="toggleEdit()"
+                class="flex items-center gap-2 px-4 py-2 bg-surface border border-gray-700/50 rounded-xl text-xs font-bold text-muted hover:text-white hover:border-accent/50 transition-all"
+              >
+                <i class="fa-regular fa-pen-to-square"></i>
+                <span data-i18n="profile.editProfile">Edit Profile</span>
+              </button>
+            </div>
+
+            <!-- Fields -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+              <div class="flex flex-col gap-1.5">
+                <label
+                  class="text-[10px] font-bold text-muted uppercase tracking-widest"
+                  data-i18n="profile.username"
+                  >Username</label
+                >
+                <input id="f-username" type="text" class="f-input" disabled />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label
+                  class="text-[10px] font-bold text-muted uppercase tracking-widest"
+                  data-i18n="profile.emailLabel"
+                  >Email</label
+                >
+                <input id="f-email" type="email" class="f-input" disabled />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label
+                  class="text-[10px] font-bold text-muted uppercase tracking-widest"
+                  data-i18n="profile.countryCode"
+                  >Country Code</label
+                >
+                <input
+                  id="f-country"
+                  type="text"
+                  class="f-input"
+                  disabled
+                  placeholder="+855"
+                />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label
+                  class="text-[10px] font-bold text-muted uppercase tracking-widest"
+                  data-i18n="profile.phoneLabel"
+                  >Phone</label
+                >
+                <input id="f-phone" type="text" class="f-input" disabled />
+              </div>
+            </div>
+
+            <!-- Bio -->
+            <div class="flex flex-col gap-1.5 mb-5">
+              <label
+                class="text-[10px] font-bold text-muted uppercase tracking-widest"
+                data-i18n="profile.bio"
+                >Bio</label
+              >
+              <textarea
+                id="f-bio"
+                rows="2"
+                class="f-input resize-none"
+                disabled
+                placeholder="Tell readers about yourself..."
+                data-i18n-placeholder="profile.bioPlaceholder"
+              ></textarea>
+            </div>
+
+            <!-- Favorite Genres -->
+            <div class="mb-6">
+              <label
+                class="text-[10px] font-bold text-muted uppercase tracking-widest block mb-3"
+                data-i18n="profile.favoriteGenres"
+                >Favorite Genres</label
+              >
+              <div class="flex flex-wrap gap-2" id="genre-chips">
+                <span class="genre-chip selected" data-genre="Action">
+                  <span data-i18n="genre.action">Action</span></span
+                >
+                <span class="genre-chip selected" data-genre="Fantasy">
+                  <span data-i18n="genre.fantasy">Fantasy</span></span
+                >
+                <span class="genre-chip" data-genre="Romance">
+                  <span data-i18n="genre.romance">Romance</span></span
+                >
+                <span class="genre-chip" data-genre="Horror">
+                  <span data-i18n="genre.horror">Horror</span></span
+                >
+                <span class="genre-chip" data-genre="Sci-Fi">
+                  <span data-i18n="genre.scifi">Sci-Fi</span></span
+                >
+                <span class="genre-chip" data-genre="Comedy">
+                  <span data-i18n="genre.comedy">Comedy</span></span
+                >
+                <span class="genre-chip" data-genre="Slice of Life">
+                  <span data-i18n="genre.sliceOfLife">Slice of Life</span></span
+                >
+                <span class="genre-chip" data-genre="Thriller">
+                  <span data-i18n="genre.thriller">Thriller</span></span
+                >
+              </div>
+            </div>
+
+            <!-- Save / Cancel -->
+            <div
+              id="edit-actions"
+              class="hidden gap-3 mb-6"
+              style="display: none"
+            >
+              <button
+                onclick="saveProfile()"
+                class="px-5 py-2.5 bg-accent hover:bg-pink-500 text-white font-bold text-sm rounded-xl transition-all"
+              >
+                <i class="fa-solid fa-floppy-disk mr-1.5"></i
+                ><span data-i18n="profile.saveChanges">Save Changes</span>
+              </button>
+              <button
+                onclick="cancelEdit()"
+                class="px-5 py-2.5 bg-surface hover:bg-gray-700 text-muted font-bold text-sm rounded-xl border border-gray-700/50 transition-all"
+                data-i18n="profile.cancel"
+              >
+                Cancel
+              </button>
+            </div>
+
+            <!-- Change Password -->
+            <div class="pt-6 border-t border-gray-800/50">
+              <div class="flex items-center gap-3 mb-5">
+                <div class="w-1 h-6 bg-accent rounded-full"></div>
+                <h2
+                  class="font-black text-base"
+                  data-i18n="profile.changePassword"
+                >
+                  Change Password
+                </h2>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-4">
+                <div class="flex flex-col gap-1.5">
+                  <label
+                    class="text-[10px] font-bold text-muted uppercase tracking-widest"
+                    data-i18n="profile.currentPassword"
+                    >Current Password</label
+                  >
+                  <input
+                    id="f-cur-pw"
+                    type="password"
+                    class="f-input"
+                    placeholder="••••••••"
+                  />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label
+                    class="text-[10px] font-bold text-muted uppercase tracking-widest"
+                    data-i18n="profile.newPassword"
+                    >New Password</label
+                  >
+                  <input
+                    id="f-new-pw"
+                    type="password"
+                    class="f-input"
+                    placeholder="••••••••"
+                  />
+                </div>
+              </div>
+              <button
+                onclick="changePassword()"
+                class="px-5 py-2.5 bg-surface hover:bg-gray-700 text-white font-bold text-sm rounded-xl border border-gray-700/50 transition-all"
+                data-i18n="profile.updatePassword"
+              >
+                Update Password
+              </button>
+            </div>
+          </div>
+
+          <!-- ── PANEL: READING HISTORY ── -->
+          <div
+            id="panel-history"
+            class="panel glass-card border border-gray-800/60 rounded-2xl p-6 md:p-8 fade-up"
+            style="animation-delay: 0.2s"
+          >
+            <div
+              class="flex items-center justify-between mb-6 pb-5 border-b border-gray-800/50"
+            >
+              <div class="flex items-center gap-3">
+                <div class="w-1 h-6 bg-accent rounded-full"></div>
+                <h2
+                  class="font-black text-base"
+                  data-i18n="profile.readingHistory"
+                >
+                  Reading History
+                </h2>
+                <span
+                  id="history-count"
+                  class="text-[10px] font-black bg-accent/10 text-accent px-2 py-0.5 rounded-full"
+                ></span>
+              </div>
+              <button
+                onclick="clearHistory()"
+                class="text-xs font-bold text-muted hover:text-red-400 transition-colors flex items-center gap-1.5"
+              >
+                <i class="fa-solid fa-trash-can"></i>
+                <span data-i18n="profile.clearAll">Clear All</span>
+              </button>
+            </div>
+            <div id="history-list" class="flex flex-col gap-3"></div>
+          </div>
+
+          <!-- ── PANEL: SETTINGS ── -->
+          <div
+            id="panel-settings"
+            class="panel glass-card border border-gray-800/60 rounded-2xl p-6 md:p-8 fade-up"
+            style="animation-delay: 0.2s"
+          >
+            <div
+              class="flex items-center gap-3 mb-6 pb-5 border-b border-gray-800/50"
+            >
+              <div class="w-1 h-6 bg-accent rounded-full"></div>
+              <h2 class="font-black text-base" data-i18n="profile.preferences">
+                Preferences
+              </h2>
+            </div>
+
+            <div class="flex flex-col gap-3 mb-8">
+              <!-- Theme -->
+              <div
+                class="flex items-center justify-between p-4 bg-surface/40 rounded-xl border border-gray-800/40 hover:border-gray-700/60 transition-colors"
+              >
+                <div>
+                  <div
+                    class="font-bold text-sm"
+                    data-i18n="profile.darkLightMode"
+                  >
+                    Dark / Light Mode
+                  </div>
+                  <div
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="profile.switchAppearance"
+                  >
+                    Switch the site appearance
+                  </div>
+                </div>
+                <div
+                  id="toggle-theme"
+                  class="toggle off"
+                  onclick="toggleTheme()"
+                >
+                  <div class="toggle-dot"></div>
+                </div>
+              </div>
+              <!-- Notifications -->
+              <div
+                class="flex items-center justify-between p-4 bg-surface/40 rounded-xl border border-gray-800/40 hover:border-gray-700/60 transition-colors"
+              >
+                <div>
+                  <div
+                    class="font-bold text-sm"
+                    data-i18n="profile.chapterNotif"
+                  >
+                    Chapter Notifications
+                  </div>
+                  <div
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="profile.chapterNotifDesc"
+                  >
+                    Alert when new chapters drop
+                  </div>
+                </div>
+                <div
+                  id="toggle-notif"
+                  class="toggle off"
+                  onclick="togglePref('notif')"
+                >
+                  <div class="toggle-dot"></div>
+                </div>
+              </div>
+              <!-- Autoplay -->
+              <div
+                class="flex items-center justify-between p-4 bg-surface/40 rounded-xl border border-gray-800/40 hover:border-gray-700/60 transition-colors"
+              >
+                <div>
+                  <div
+                    class="font-bold text-sm"
+                    data-i18n="profile.autoplayCarousel"
+                  >
+                    Autoplay Carousel
+                  </div>
+                  <div
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="profile.autoplayDesc"
+                  >
+                    Auto-advance hero slides
+                  </div>
+                </div>
+                <div
+                  id="toggle-autoplay"
+                  class="toggle on"
+                  onclick="togglePref('autoplay')"
+                >
+                  <div class="toggle-dot"></div>
+                </div>
+              </div>
+              <!-- Reading Mode -->
+              <div
+                class="flex items-center justify-between p-4 bg-surface/40 rounded-xl border border-gray-800/40 hover:border-gray-700/60 transition-colors"
+              >
+                <div>
+                  <div class="font-bold text-sm" data-i18n="profile.scrollMode">
+                    Default Scroll Mode
+                  </div>
+                  <div
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="profile.scrollModeDesc"
+                  >
+                    Use vertical scroll reader by default
+                  </div>
+                </div>
+                <div
+                  id="toggle-scroll"
+                  class="toggle on"
+                  onclick="togglePref('scroll')"
+                >
+                  <div class="toggle-dot"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Danger Zone -->
+            <div class="pt-5 border-t border-gray-800/50">
+              <p
+                class="text-[10px] font-black text-red-400 uppercase tracking-widest mb-3"
+                data-i18n="profile.dangerZone"
+              >
+                Danger Zone
+              </p>
+              <div class="flex flex-wrap gap-3">
+                <button
+                  onclick="doLogout()"
+                  class="px-5 py-2.5 bg-surface hover:bg-gray-700 text-muted font-bold text-sm rounded-xl border border-gray-700/50 transition-all"
+                >
+                  <i class="fa-solid fa-right-from-bracket mr-1.5"></i
+                  ><span data-i18n="profile.logOut">Log Out</span>
+                </button>
+                <button
+                  onclick="doDeleteAccount()"
+                  class="px-5 py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 font-bold text-sm rounded-xl border border-red-500/20 transition-all"
+                >
+                  <i class="fa-solid fa-triangle-exclamation mr-1.5"></i
+                  ><span data-i18n="profile.deleteAccount"
+                    >Delete My Account</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end right -->
+      </div>
+      <!-- end flex row -->
+    </main>
+
+    <!-- footer -->
+    <footer class="bg-darker border-t border-gray-800/50 mt-auto">
+      <!-- Gradient top border accent -->
+      <div
+        class="h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent"
+      ></div>
+      <div class="max-w-[1440px] mx-auto px-6 md:px-10 py-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <!-- Brand Column -->
+          <div class="flex flex-col gap-3">
+            <span class="font-black text-xl tracking-wider text-accent"
+              >Reader's Haven</span
+            >
+            <p
+              class="text-muted text-sm leading-relaxed max-w-xs"
+              data-i18n="footer.copyright"
+            >
+              Your ultimate destination for manga, manhwa, and light novels.
+              Read, discover, and track your favorite series.
+            </p>
+            <div class="flex gap-3 mt-2">
+             <a href="https://www.facebook.com/"
+                            class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"><i
+                                class="fa-brands fa-facebook text-sm"></i></a>
+                        <a href="https://web.telegram.org/k/"
+                            class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"><i
+                                class="fa-brands fa-telegram text-sm"></i></a>
+                        <a href="https://discord.com/channels/@me"
+                            class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"><i
+                                class="fa-brands fa-discord text-sm"></i></a>
+                        <a href=""
+                class="w-9 h-9 rounded-full bg-surface flex items-center justify-center text-muted hover:text-accent hover:bg-accent/10 transition-all duration-300"
+                ><i class="fa-brands fa-github text-sm"></i
+              ></a>
+            </div>
+          </div>
+          <!-- Quick Links -->
+          <div class="flex flex-col gap-2">
+            <h4
+              class="font-black text-xs text-white uppercase tracking-widest mb-1"
+              data-i18n="footer.quickLinks"
+            >
+              Quick Links
+            </h4>
+            <a
+              href="new_release.html"
+              class="text-muted text-sm hover:text-accent transition-colors"
+              data-i18n="footer.newReleases"
+              >New Releases</a
+            >
+            <a
+              href="community.html"
+              class="text-muted text-sm hover:text-accent transition-colors"
+              data-i18n="footer.community"
+              >Community</a
+            >
+          </div>
+          <!-- Newsletter -->
+          <div class="flex flex-col gap-3">
+            <h4
+              class="font-black text-xs text-white uppercase tracking-widest mb-1"
+              data-i18n="footer.stayUpdated"
+            >
+              Stay Updated
+            </h4>
+            <p
+              class="text-muted text-sm"
+              data-i18n="footer.text"
+              data-i18n="footer.text"
+            >
+              Get notified about new releases and updates.
+            </p>
+            <div class="flex gap-2">
+              <input
+                type="email"
+                data-i18n-placeholder="youremailPlaceholder"
+                placeholder="Your email"
+                class="flex-1 bg-surface border border-gray-800/60 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none focus:border-accent transition-all"
+              />
+              <button
+                class="px-5 py-2.5 bg-accent hover:bg-accent/85 text-white font-bold text-xs rounded-xl transition-all duration-300 tracking-wider"
+                data-i18n="footer.join"
+              >
+                JOIN
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="h-px bg-gray-800/50 mb-6"></div>
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-4"
+        >
+          <span class="font-bold text-sm tracking-wider text-accent"
+            >Reader's Haven © 2026</span
+          >
+          <div class="flex gap-5 text-muted text-sm">
+            <a
+              href="contact.html"
+              class="hover:text-accent transition-colors"
+              data-i18n="footer.contact"
+              >Contact</a
+            >
+            <a
+              href="aboutus.html"
+              class="hover:text-accent transition-colors"
+              data-i18n="footer.aboutUs"
+              >About Us</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast -->
+    <div id="toast">
+      <div class="toast-dot"></div>
+      <span id="toast-msg"></span>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         JAVASCRIPT
+    ══════════════════════════════════════════ -->
+    <script>
+      /* ── HELPERS ── */
+      function getUser() {
+        try {
+          return JSON.parse(localStorage.getItem("rh_user"));
+        } catch (e) {
+          return null;
+        }
+      }
+      function getHistory() {
+        try {
+          return JSON.parse(localStorage.getItem("rh_history")) || [];
+        } catch (e) {
+          return [];
+        }
+      }
+
+      /* Lightweight translations for JS-generated strings (toasts, time labels) */
+      const RH_JS_STRINGS = {
+        en: {
+          avatarUpdated: "Avatar updated!",
+          notLoggedIn: "Not logged in",
+          usernameEmpty: "Username cannot be empty",
+          profileSaved: "Profile saved!",
+          fillBothPw: "Fill in both password fields",
+          wrongCurrentPw: "Current password is incorrect",
+          pwTooShort: "New password must be 6+ characters",
+          pwUpdated: "Password updated!",
+          historyCleared: "History cleared",
+          lightModeOn: "Light mode on",
+          darkModeOn: "Dark mode on",
+          settingEnabled: "Setting enabled",
+          settingDisabled: "Setting disabled",
+          justNow: "Just now",
+          mAgo: "m ago",
+          hAgo: "h ago",
+          dAgo: "d ago",
+          cancelEdit: "Cancel Edit",
+          editProfile: "Edit Profile",
+        },
+        km: {
+          avatarUpdated: "រូបភាពប្រវត្តិរូបបានធ្វើបច្ចុប្បន្នភាព!",
+          notLoggedIn: "មិនទាន់ចូលគណនី",
+          usernameEmpty: "ឈ្មោះអ្នកប្រើមិនអាចទទេបានទេ",
+          profileSaved: "ប្រវត្តិរូបបានរក្សាទុក!",
+          fillBothPw: "សូមបំពេញចន្លោះពាក្យសម្ងាត់ទាំងពីរ",
+          wrongCurrentPw: "ពាក្យសម្ងាត់បច្ចុប្បន្នមិនត្រឹមត្រូវទេ",
+          pwTooShort: "ពាក្យសម្ងាត់ថ្មីត្រូវមានយ៉ាងតិច ៦ តួអក្សរ",
+          pwUpdated: "ពាក្យសម្ងាត់បានធ្វើបច្ចុប្បន្នភាព!",
+          historyCleared: "ប្រវត្តិបានលុបចេញ",
+          lightModeOn: "បានបើករបៀបភ្លឺ",
+          darkModeOn: "បានបើករបៀបងងឹត",
+          settingEnabled: "ការកំណត់បានបើក",
+          settingDisabled: "ការកំណត់បានបិទ",
+          justNow: "ទើបតែឥឡូវ",
+          mAgo: "នាទីមុន",
+          hAgo: "ម៉ោងមុន",
+          dAgo: "ថ្ងៃមុន",
+          cancelEdit: "បោះបង់ការកែប្រែ",
+          editProfile: "កែប្រែប្រវត្តិរូប",
+        },
+      };
+      function t(key) {
+        const lang =
+          (window.RH_i18n && window.RH_i18n.getCurrentLang()) || "en";
+        const dict = RH_JS_STRINGS[lang] || RH_JS_STRINGS.en;
+        return dict[key] || RH_JS_STRINGS.en[key] || key;
+      }
+
+      let toastTimer;
+      function showToast(msg, isError = false) {
+        const t = document.getElementById("toast");
+        const m = document.getElementById("toast-msg");
+        m.textContent = msg;
+        t.classList.toggle("error", isError);
+        t.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove("show"), 2800);
+      }
+
+      function timeAgo(ts) {
+        if (!ts) return "";
+        const diff = Date.now() - ts;
+        const m = Math.floor(diff / 60000);
+        const h = Math.floor(diff / 3600000);
+        const d = Math.floor(diff / 86400000);
+        if (m < 1) return t("justNow");
+        if (m < 60) return `${m}${t("mAgo")}`;
+        if (h < 24) return `${h}${t("hAgo")}`;
+        return `${d}${t("dAgo")}`;
+      }
+
+      /* ── LOAD PROFILE ── */
+      function loadProfile() {
+        const user = getUser();
+        const hist = getHistory();
+
+        // Stats
+        document.getElementById("stat-read").textContent = hist.length;
+        document.getElementById("stat-sessions").textContent = hist.length;
+        document.getElementById("stat-streak").textContent = Math.min(
+          hist.length,
+          7,
+        );
+
+        // Goal widget
+        const done = Math.min(hist.length, 10);
+        const total = 10;
+        const pct = Math.round((done / total) * 100);
+        document.getElementById("goal-done").textContent = done;
+        document.getElementById("goal-total").textContent = total;
+        document.getElementById("goal-pct").textContent = pct + "%";
+        document.getElementById("goal-bar").style.width = pct + "%";
+
+        if (!user) {
+          document.getElementById("sb-name").textContent = "Guest Reader";
+          document.getElementById("sb-email").textContent = "Not logged in";
+          document.getElementById("f-username").value = "";
+          document.getElementById("f-email").value = "";
+          return;
+        }
+
+        const name = user.username || "Reader";
+        document.getElementById("sb-name").textContent = name;
+        document.getElementById("sb-email").textContent = user.email || "—";
+        document.getElementById("f-username").value = name;
+        document.getElementById("f-email").value = user.email || "";
+        document.getElementById("f-phone").value = user.phone || "";
+        document.getElementById("f-country").value = user.countryCode || "";
+        document.getElementById("f-bio").value = user.bio || "";
+
+        // Avatar
+        const letter = document.getElementById("avatar-letter");
+        const img = document.getElementById("avatar-img");
+        if (user.avatar) {
+          img.src = user.avatar;
+          img.classList.remove("hidden");
+          letter.classList.add("hidden");
+        } else {
+          letter.textContent = name.charAt(0).toUpperCase();
+          img.classList.add("hidden");
+          letter.classList.remove("hidden");
+        }
+      }
+
+      /* ── AVATAR UPLOAD ── */
+      document
+        .getElementById("avatar-upload")
+        .addEventListener("change", function () {
+          const file = this.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const user = getUser() || {};
+            user.avatar = e.target.result;
+            localStorage.setItem("rh_user", JSON.stringify(user));
+            loadProfile();
+            if (window.updateHeaderAvatar) window.updateHeaderAvatar();
+            showToast(t("avatarUpdated"));
+          };
+          reader.readAsDataURL(file);
+        });
+
+      /* ── GENRE CHIPS ── */
+      document.querySelectorAll(".genre-chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+          chip.classList.toggle("selected");
+        });
+      });
+
+      /* ── EDIT PROFILE ── */
+      let editing = false;
+      function toggleEdit() {
+        editing = !editing;
+        const fields = ["f-username", "f-phone", "f-country", "f-bio"];
+        fields.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.disabled = !editing;
+        });
+        document.getElementById("edit-actions").style.display = editing
+          ? "flex"
+          : "none";
+        document.getElementById("btn-edit").innerHTML = editing
+          ? '<i class="fa-solid fa-xmark"></i> ' + t("cancelEdit")
+          : '<i class="fa-regular fa-pen-to-square"></i> ' + t("editProfile");
+      }
+      function cancelEdit() {
+        editing = true;
+        toggleEdit();
+        loadProfile();
+      }
+      function saveProfile() {
+        const user = getUser();
+        if (!user) return showToast(t("notLoggedIn"), true);
+        const u = document.getElementById("f-username").value.trim();
+        if (!u) return showToast(t("usernameEmpty"), true);
+        user.username = u;
+        user.phone = document.getElementById("f-phone").value.trim();
+        user.countryCode = document.getElementById("f-country").value.trim();
+        user.bio = document.getElementById("f-bio").value.trim();
+        localStorage.setItem("rh_user", JSON.stringify(user));
+        editing = true;
+        toggleEdit();
+        loadProfile();
+        if (window.updateHeaderAvatar) window.updateHeaderAvatar();
+        showToast(t("profileSaved"));
+      }
+
+      /* ── CHANGE PASSWORD ── */
+      function changePassword() {
+        const user = getUser();
+        if (!user) return showToast(t("notLoggedIn"), true);
+        const cur = document.getElementById("f-cur-pw").value;
+        const nw = document.getElementById("f-new-pw").value;
+        if (!cur || !nw) return showToast(t("fillBothPw"), true);
+        if (cur !== user.password) return showToast(t("wrongCurrentPw"), true);
+        if (nw.length < 6) return showToast(t("pwTooShort"), true);
+        user.password = nw;
+        localStorage.setItem("rh_user", JSON.stringify(user));
+        document.getElementById("f-cur-pw").value = "";
+        document.getElementById("f-new-pw").value = "";
+        showToast(t("pwUpdated"));
+      }
+
+      /* ── READING HISTORY ── */
+      function renderHistory() {
+        const list = document.getElementById("history-list");
+        const cnt = document.getElementById("history-count");
+        const h = getHistory();
+        cnt.textContent = h.length ? h.length : "";
+
+        if (h.length === 0) {
+          list.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-16 gap-3 text-center">
+                    <i class="fa-regular fa-book-open text-5xl text-muted/20"></i>
+                    <p class="text-muted font-bold text-sm" data-i18n="profile.noHistory">No reading history yet.</p>
+                    <a href="index.html" class="mt-1 px-4 py-2 bg-accent/10 text-accent text-xs font-black rounded-full hover:bg-accent/20 transition-all" data-i18n="profile.browseManga">
+                        Browse manga →
+                    </a>
+                </div>`;
+          if (window.RH_i18n)
+            window.RH_i18n.applyTranslations(window.RH_i18n.getCurrentLang());
+          return;
+        }
+
+        list.innerHTML = h
+          .map(
+            (item, i) => `
+            <div class="h-card flex items-center gap-4 p-3 bg-surface/40 rounded-2xl border border-gray-800/40 hover:border-accent/20 transition-all">
+                <img src="${item.img}" alt="${item.title}"
+                     class="w-12 h-16 object-cover rounded-xl flex-shrink-0 border border-gray-800/60"
+                     onerror="this.src='https://placehold.co/48x64/202020/D6336C?text=?'">
+                <div class="flex-1 min-w-0">
+                    <div class="font-bold text-sm truncate">${item.title}</div>
+                    <div class="text-xs text-muted mt-0.5">${item.ch || ""}</div>
+                    <div class="text-[10px] text-muted/60 mt-1">${timeAgo(item.timestamp)}</div>
+                </div>
+                <button class="text-[10px] font-bold text-red-400/50 hover:text-red-400 transition-colors flex-shrink-0 px-2 py-1 rounded-lg hover:bg-red-500/10"
+                        onclick="removeHistoryItem(${i})">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>`,
+          )
+          .join("");
+      }
+
+      function removeHistoryItem(i) {
+        let h = getHistory();
+        h.splice(i, 1);
+        localStorage.setItem("rh_history", JSON.stringify(h));
+        document.getElementById("stat-read").textContent = h.length;
+        document.getElementById("stat-sessions").textContent = h.length;
+        renderHistory();
+      }
+      function clearHistory() {
+        if (!confirm("Clear all reading history?")) return;
+        localStorage.removeItem("rh_history");
+        document.getElementById("stat-read").textContent = 0;
+        document.getElementById("stat-sessions").textContent = 0;
+        renderHistory();
+        showToast(t("historyCleared"));
+      }
+
+      /* ── TABS ── */
+      function switchTab(tab) {
+        document
+          .querySelectorAll(".panel")
+          .forEach((p) => p.classList.remove("active"));
+        document
+          .querySelectorAll("[data-tab]")
+          .forEach((b) => b.classList.remove("active"));
+        document.getElementById("panel-" + tab).classList.add("active");
+        const btn = document.querySelector(`[data-tab="${tab}"]`);
+        if (btn) btn.classList.add("active");
+        if (tab === "history") renderHistory();
+      }
+
+      /* ── SETTINGS TOGGLES ── */
+      function toggleTheme() {
+        const tog = document.getElementById("toggle-theme");
+        const isLight = !tog.classList.contains("on");
+        tog.classList.toggle("on", isLight);
+        tog.classList.toggle("off", !isLight);
+        document.documentElement.classList.toggle("light-mode", isLight);
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+        showToast(isLight ? t("lightModeOn") : t("darkModeOn"));
+      }
+      function togglePref(key) {
+        const tog = document.getElementById("toggle-" + key);
+        const on = !tog.classList.contains("on");
+        tog.classList.toggle("on", on);
+        tog.classList.toggle("off", !on);
+        showToast(on ? t("settingEnabled") : t("settingDisabled"));
+      }
+
+      /* ── LOGOUT / DELETE ── */
+      function doLogout() {
+        if (!confirm("Log out of Reader's Haven?")) return;
+        localStorage.removeItem("rh_logged_in");
+        window.location.href = "index.html";
+      }
+      function doDeleteAccount() {
+        if (
+          !confirm(
+            "This will permanently delete your account and all saved data. Are you sure?",
+          )
+        )
+          return;
+        localStorage.clear();
+        window.location.href = "index.html";
+      }
+
+      /* ── INIT ── */
+      document.addEventListener("DOMContentLoaded", () => {
+        loadProfile();
+        const isLight = localStorage.getItem("theme") === "light";
+        const tog = document.getElementById("toggle-theme");
+        if (isLight) {
+          tog.classList.add("on");
+          tog.classList.remove("off");
+        }
+      });
+    </script>
+
+    <script src="./manga-data/manga-data.js"></script>
+    <script src="./assets/js/i18n.js"></script>
+    <script src="./assets/js/home-page.js"></script>
+    <!-- Note: manga-data.js must load before home-page.js; i18n.js before home-page.js -->
+  </body>
+</html>
